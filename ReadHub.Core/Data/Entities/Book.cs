@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static ReadHub.Core.DataConstants.Book;
 
 namespace ReadHub.Core.Data.Entities
 {
@@ -14,9 +12,11 @@ namespace ReadHub.Core.Data.Entities
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
         [Required]
+        [MaxLength(TitleMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
@@ -25,6 +25,9 @@ namespace ReadHub.Core.Data.Entities
 
         [Required]
         public string ImageUrlLink { get; set; } = null!;
+
+        [Required]
+        public string ReaderUrlLink { get; set; } = null!;
 
         [Required]
         public int AuthorId { get; set; }
@@ -37,9 +40,11 @@ namespace ReadHub.Core.Data.Entities
         public DateTime Year { get; set; }
 
         [Required]
+        [MaxLength(LanguageMaxLength)]
         public string Language { get; set; } = null!;
 
         [Required]
+        [MaxLength(NationalityMaxLength)]
         public string Nationality { get; set; } = null!;
 
         [Required]

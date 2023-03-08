@@ -16,15 +16,15 @@ namespace ReadHub.Core.Data
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = null!;
 
-        [ForeignKey(nameof(Cart))]
-        public int CartId { get; set; }
-        public Cart Cart { get; set; } = null!;
+        public ICollection<Book> MyCart { get; set; } = new List<Book>();
 
-        public ICollection<EBook> EBooks { get; set; } = new List<EBook>();
+        public ICollection<Book> EBooks { get; set; } = new List<Book>();
 
-        public ICollection<Review> Reviews { get; set; } = new List<Review>();
+        public ICollection<Review> MyReviews { get; set; } = new List<Review>();
 
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public ICollection<Order> MyOrders { get; set; } = new List<Order>();
+
+        public ICollection<Book> Favorite { get; set; } = new List<Book>();
 
         public bool IsActive { get; set; } = true;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static ReadHub.Core.DataConstants.User;
+using static ReadHub.Core.DataConstants.Author;
 
 namespace ReadHub.Core.Data.Entities
 {
@@ -16,6 +16,13 @@ namespace ReadHub.Core.Data.Entities
         [Required]
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = null!;
+
+        [MaxLength(PhoneNumberMaxLength)]
+        public string? PhoneNumber { get; set; }
+
+        [ForeignKey(nameof(User))]
+        public string? UserId { get; set; }
+        public User? User { get; set; }
 
         public ICollection<Book> PublishedBooks { get; set; } = new List<Book>();
 
