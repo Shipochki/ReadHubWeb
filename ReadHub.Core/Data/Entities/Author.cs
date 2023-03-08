@@ -17,11 +17,10 @@ namespace ReadHub.Core.Data.Entities
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = null!;
 
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
-
-        public User User { get; set; } = null!;
-
         public ICollection<Book> PublishedBooks { get; set; } = new List<Book>();
+
+        public DateTime CreatedTime { get; set; } = DateTime.Now;
+
+        public DateTime UpdatedTime { get; set; }
     }
 }
