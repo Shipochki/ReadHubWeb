@@ -31,8 +31,8 @@ namespace ReadHub.Core
             public const int NationalityMinLength = 4;
             public const int NationalityMaxLength = 60;
 
-            public const decimal PriceRangeMin = 0.00m;
-            public const decimal PriceRangeMax = 250.00m;
+            public const string PriceRangeMin = "0.00";
+            public const string PriceRangeMax = "250.00";
         }
 
         public class Publisher

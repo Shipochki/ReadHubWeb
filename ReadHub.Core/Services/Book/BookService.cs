@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ReadHub.Core.Services.Author;
+using ReadHub.Core.Data.Entities;
+using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Book.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ReadHub.Core.Services.Book
+namespace ReadHub.Core
 {
     public class BookService : IBookService
     {
@@ -38,6 +33,29 @@ namespace ReadHub.Core.Services.Book
                 })
                 .ToListAsync();
         }
+
+		public async Task<int> Create(BookCreateServiceModel model)
+		{
+            var newBook = new Book
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ImageUrlLink = model.ImageUrlLink,
+                ReaderUrlLink = model.ReaderUrlLink,
+                AuthorId = model.AuthorId,
+                Genre = model.Genre,
+                Year = model.Year,
+                Language = model.Language,
+                Nationality = model.Nationality,
+                TypeBook = model.TypeBook,
+                Price = model.Price,
+            };
+
+            await this.context.Books.AddAsync(newBook);
+            await this.context.SaveChangesAsync();
+
+            return newBook.Id;
+		}
 
 		public async Task<BookServiceModel> DetailsById(int bookId)
 		{

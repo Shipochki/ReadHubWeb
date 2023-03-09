@@ -57,5 +57,24 @@ namespace ReadHub.Web.Controllers
 		{
 			return View();
 		}
+
+		[HttpGet]
+		public IActionResult MyCart(int id)
+		{
+			return View();
+		}
+
+		public IActionResult Add()
+		{
+			return View(new BookCreateServiceModel());
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Add(BookCreateServiceModel model)
+		{
+			var bookId = await this.books.Create(model);
+
+			return RedirectToAction(nameof(Details), new { bookId });
+		}
 	}
 }

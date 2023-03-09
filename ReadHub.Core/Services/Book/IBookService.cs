@@ -7,5 +7,7 @@ namespace ReadHub.Core.Services.Book
         Task<IEnumerable<BookServiceModel>> All();
 
         Task<BookServiceModel> DetailsById(int bookId);
+
+        Task<int> Create(BookCreateServiceModel model);
     }
 }

@@ -1,0 +1,83 @@
+﻿@using ReadHub.Core.Services.Book.Models;
+@model BookCreateServiceModel
+
+<div class="row">
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post">
+			<div class="form-group">
+				<label asp-for="Title"></label>
+				<input asp-for="Title" class="form-control" placeholder="Title..." />
+				<span asp-validation-for="Title" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Description"></label>
+				<textarea asp-for="Description" rows="4" class="form-control" placeholder="Description"></textarea>
+				<span asp-validation-for="Description" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PublisherId">Publisher</label>
+				<select asp-for="PublisherId" class="form-control">
+					@foreach (var category in Model.Publishers)
+					{
+						<option value="@category.Id">@category.Name</option>
+					}
+				</select>
+				<span asp-validation-for="PublisherId" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ImageUrlLink"></label>
+				<input asp-for="ImageUrlLink" class="form-control" />
+				<span asp-validation-for="ImageUrlLink" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ReaderUrlLink"></label>
+				<input asp-for="ReaderUrlLink" class="form-control" />
+				<span asp-validation-for="ReaderUrlLink" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AuthorId">Author</label>
+				<select asp-for="AuthorId" class="form-control">
+					@foreach (var category in Model.Authors)
+					{
+							<option value="@category.Id">@category.FirstName @category.LastName</option>
+					}
+				</select>
+				<span asp-validation-for="AuthorId" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Genre"></label>
+				<input asp-for="Genre" class="form-control" />
+				<span asp-validation-for="Genre" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Year"></label>
+				<input type="date" asp-for="Year" class="form-control" />
+				<span asp-validation-for="Year" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Language"></label>
+				<input asp-for="Language" class="form-control" />
+				<span asp-validation-for="Language" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Nationality"></label>
+				<input asp-for="Nationality" class="form-control" />
+				<span asp-validation-for="Nationality" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TypeBook"></label>
+				<input asp-for="TypeBook" class="form-control" />
+				<span asp-validation-for="TypeBook" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Price"></label>
+				<input asp-for="Price" class="form-control" />
+				<span asp-validation-for="Price" class="small text-danger"></span>
+			</div>
+			<div class="text-center">
+				<input class="btn btn-primary mt-3" type="submit" value="Save" />
+			</div>
+		</form>
+	</div>
+</div>
+
