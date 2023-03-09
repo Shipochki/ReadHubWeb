@@ -16,8 +16,6 @@ builder.Services.AddDbContext<ReadHubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddTransient<IBookService, BookService>();
-
 builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -29,12 +27,12 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ReadHubDbContext>();
 
-
-
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
+
+builder.Services.AddTransient<IBookService, BookService>();
 
 var app = builder.Build();
 
