@@ -13,6 +13,7 @@ namespace ReadHub.Core
         public ReadHubDbContext(DbContextOptions<ReadHubDbContext> options)
             : base(options)
         {
+            this.Database.Migrate();
         }
 
         public DbSet<Author> Authors { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadHub.Core.Services.Review.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace ReadHub.Core.Services.Review
 {
-    internal class IReviewService
+    public interface IReviewService
     {
+        public Task<IEnumerable<ReviewModelService>> AllWithIdBook(int bookId);
     }
 }

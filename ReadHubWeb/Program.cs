@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReadHub.Core;
 using ReadHub.Core.Data;
+using ReadHub.Core.Services.Author;
+using ReadHub.Core.Services.Book;
+using ReadHub.Core.Services.Publisher;
+using ReadHub.Core.Services.Review;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ReadHubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddTransient<IBookService, BookService>();
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -21,19 +27,21 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireUppercase = false;
 })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ReadHubDbContext>(); ;
+    .AddEntityFrameworkStores<ReadHubDbContext>();
+
+
 
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
 else

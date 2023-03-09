@@ -10,19 +10,20 @@ namespace ReadHub.Core.Services.Book.Models
 {
     public class BookServiceModel
     {
+        public int Id { get; set; }
         public string Title { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
-        public int PublisherId { get; set; }
+        public string PublisherName { get; set; } = null!;
 
         public string ImageUrlLink { get; set; } = null!;
 
         public string ReaderUrlLink { get; set; } = null!;
 
-        public int AuthorId { get; set; }
+        public string AuthorFullName { get; set; } = null!;
 
-        public string Genere { get; set; } = null!;
+        public string Genre { get; set; } = null!;
 
         public string Year { get; set; } = null!;
 

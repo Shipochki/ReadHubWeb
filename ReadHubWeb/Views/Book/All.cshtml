@@ -1,0 +1,25 @@
+﻿@using ReadHub.Core.Services.Book.Models;
+
+@model BookQueryServiceModel
+
+@{
+	ViewBag.Title = "All Books";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+@if (!Model.Books.Any())
+{
+		<h2 class="text-center">No houses found by the given criteria!</h2>
+}
+
+<div class="row">
+	@foreach (var house in Model.Books)
+	{
+		<partial name="_HousePartial" model="@house" />
+	}
+</div>
+
+

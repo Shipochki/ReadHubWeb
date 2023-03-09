@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ReadHub.Core.Services.Book.Models;
 
 namespace ReadHub.Core.Services.Book
 {
-    internal class IBookService
+    public interface IBookService
     {
+        Task<IEnumerable<BookServiceModel>> All();
+
+        Task<BookServiceModel> DetailsById(int bookId);
     }
 }
