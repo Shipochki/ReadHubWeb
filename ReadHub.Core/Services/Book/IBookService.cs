@@ -1,4 +1,5 @@
-﻿using ReadHub.Core.Services.Book.Models;
+﻿using ReadHub.Core.Data.Entities;
+using ReadHub.Core.Services.Book.Models;
 
 namespace ReadHub.Core.Services.Book
 {
@@ -8,6 +9,12 @@ namespace ReadHub.Core.Services.Book
 
         Task<BookServiceModel> DetailsById(int bookId);
 
+        Task<BookDetailServiceModel> FindBookById(int bookId);
+
         Task<int> Create(BookCreateServiceModel model);
+
+        Task<BookDeleteView> Delete(int bookId);
+
+        Task Edit(int bookId, BookCreateServiceModel model);
     }
 }

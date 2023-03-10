@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadHub.Core;
 
@@ -11,9 +12,10 @@ using ReadHub.Core;
 namespace ReadHubWeb.Data.Migrations
 {
     [DbContext(typeof(ReadHubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230310082015_addKeys")]
+    partial class addKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,8 +206,8 @@ namespace ReadHubWeb.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Genre")
                         .HasColumnType("int");
@@ -245,6 +247,15 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<int>("TypeBook")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId2")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
@@ -258,6 +269,12 @@ namespace ReadHubWeb.Data.Migrations
                     b.HasIndex("OrderId");
 
                     b.HasIndex("PublisherId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasIndex("UserId2");
 
                     b.ToTable("Books");
                 });
@@ -420,7 +437,7 @@ namespace ReadHubWeb.Data.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b2fc615-eaa2-4826-bf8a-ffb7403b1246",
+                            ConcurrencyStamp = "534e0e7d-c932-46c2-8b19-18404eaebb85",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Owner",
@@ -429,9 +446,9 @@ namespace ReadHubWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB4eFkrpi7vBl69UXMsKD3+vxM+5lfF4PJ2emzn447g0eV3+VkGg5zLrPK0IFt3adQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJQu+IRJ1djZVWbU/vhbWP+53n9hDWJpA5skOoMcRBw6ij4DAMTQtHd4IdMVDKOP6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b9fbfe8c-379c-4cda-91a9-dccda8b3bd94",
+                            SecurityStamp = "e2c9aaf6-dcc2-4650-b9e8-1c486bcf25bd",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -515,6 +532,18 @@ namespace ReadHubWeb.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("EBooks")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("Favorite")
+                        .HasForeignKey("UserId1");
+
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("MyCart")
+                        .HasForeignKey("UserId2");
+
                     b.Navigation("Author");
 
                     b.Navigation("Publisher");
@@ -523,7 +552,7 @@ namespace ReadHubWeb.Data.Migrations
             modelBuilder.Entity("ReadHub.Core.Data.Entities.Order", b =>
                 {
                     b.HasOne("ReadHub.Core.Data.User", "User")
-                        .WithMany()
+                        .WithMany("MyOrders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -540,7 +569,7 @@ namespace ReadHubWeb.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("ReadHub.Core.Data.User", "User")
-                        .WithMany()
+                        .WithMany("MyReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -568,6 +597,19 @@ namespace ReadHubWeb.Data.Migrations
             modelBuilder.Entity("ReadHub.Core.Data.Entities.Publisher", b =>
                 {
                     b.Navigation("PublishedBooks");
+                });
+
+            modelBuilder.Entity("ReadHub.Core.Data.User", b =>
+                {
+                    b.Navigation("EBooks");
+
+                    b.Navigation("Favorite");
+
+                    b.Navigation("MyCart");
+
+                    b.Navigation("MyOrders");
+
+                    b.Navigation("MyReviews");
                 });
 #pragma warning restore 612, 618
         }

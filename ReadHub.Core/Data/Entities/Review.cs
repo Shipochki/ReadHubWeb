@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static ReadHub.Core.DataConstants.Review;
 
 namespace ReadHub.Core.Data.Entities
@@ -17,17 +18,13 @@ namespace ReadHub.Core.Data.Entities
         public string? Comment { get; set; }
 
         [Required]
+        [ForeignKey(nameof(Book))]
         public int BookId { get; set; }
         public Book Book { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
         public User User { get; set; } = null!;
-
-        public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-        public DateTime UpdatedTime { get; set; }
-
-        public DateTime DeletedTime { get; set; }
     }
 }

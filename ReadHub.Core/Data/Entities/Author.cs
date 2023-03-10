@@ -26,8 +26,5 @@ namespace ReadHub.Core.Data.Entities
 
         public ICollection<Book> PublishedBooks { get; set; } = new List<Book>();
 
-        public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-        public DateTime UpdatedTime { get; set; }
     }
 }

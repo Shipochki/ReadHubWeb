@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static ReadHub.Core.DataConstants.Book;
 
 namespace ReadHub.Core.Data.Entities
@@ -16,10 +17,11 @@ namespace ReadHub.Core.Data.Entities
         public string Title { get; set; } = null!;
 
         [Required]
-        [MaxLength(TitleMaxLength)]
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(Publisher))]
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; } = null!;
 
@@ -30,6 +32,7 @@ namespace ReadHub.Core.Data.Entities
         public string ReaderUrlLink { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(Author))]
         public int AuthorId { get; set; }
         public Author Author { get; set; } = null!;
 
@@ -56,11 +59,5 @@ namespace ReadHub.Core.Data.Entities
         public bool isActive { get; set; } = true;
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
-
-        public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-        public DateTime UpdatedTime { get; set;}
-
-        public DateTime DeletedTime { get; set; }
     }
 }

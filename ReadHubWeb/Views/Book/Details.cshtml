@@ -25,21 +25,38 @@
 			<p>@Model.Description</p>
 			<p>Genre: <b>@Model.Genre</b></p>
 			<div class="form-inline">
-				<a class="btn btn-warning" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-				<a class="ml-2 btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-				<form class="ml-2" asp-controller="Book" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
-					<input class="btn btn-primary" type="submit" value="AddCart" />
-				</form>
-				<form class="ml-2" asp-controller="Book" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
-					<input class="btn btn-primary" type="submit" value="AddFavorite" />
-				</form>
+				<div class="btn-group" role="group" aria-label="Basic example">
+
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-light" type="submit" value="🛒" />
+					</form>
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-light" type="submit" value="❤️" />
+					</form>
+				</div>
+				<p></p>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="Edit" asp-route-id="@Model.Id" method="get">
+						<input class="btn btn-light" type="submit" value="✏️" />
+					</form>
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
+						<input class="btn btn-light" type="submit" value="❌" />
+					</form>
+				</div>
 			</div>
 			<p></p>
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
-					<h5 class="card-title">Author Info</h5>
-					<p class="card-text">Full Name: @Model.AuthorFullName</p>
 					<p class="card-text">Publisher: @Model.PublisherName</p>
+					<p class="card-text">Genre: @Model.Genre.ToString()</p>
+					<p class="card-text">TypeBook: @Model.TypeBook.ToString()</p>
+					<p class="card-text">Year: @Model.Year.Year</p>
+					<p class="card-text">Language: @Model.Language</p>
+					<p class="card-text">Nationality: @Model.Nationality</p>
 				</div>
 			</div>
 		</div>

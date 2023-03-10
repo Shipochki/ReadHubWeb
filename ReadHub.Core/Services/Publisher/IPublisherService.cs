@@ -10,5 +10,7 @@ namespace ReadHub.Core.Services.Publisher
 	public interface IPublisherService
 	{
 		Task<PublisherServiceModel> GetPublisherById(int publisherId);
+
+		Task<IEnumerable<PublisherServiceModel>> GetAllPublishers();
 	}
 }

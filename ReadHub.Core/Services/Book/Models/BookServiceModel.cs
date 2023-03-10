@@ -17,21 +17,23 @@ namespace ReadHub.Core.Services.Book.Models
 
         public string PublisherName { get; set; } = null!;
 
-        public string ImageUrlLink { get; set; } = null!;
+        public int PublisherId { get; set; }
 
-        public string ReaderUrlLink { get; set; } = null!;
+        public string ImageUrlLink { get; set; } = null!;
 
         public string AuthorFullName { get; set; } = null!;
 
-        public string Genre { get; set; } = null!;
+        public int AuthorId { get; set; }
 
-        public string Year { get; set; } = null!;
+        public Genre Genre { get; set; }
+
+        public DateTime Year { get; set; }
 
         public string Language { get; set; } = null!;
 
         public string Nationality { get; set; } = null!;
 
-        public string TypeBook { get; set; } = null!;
+        public TypeBook TypeBook { get; set; }
 
         public decimal Price { get; set; }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadHub.Core;
 
@@ -11,9 +12,10 @@ using ReadHub.Core;
 namespace ReadHubWeb.Data.Migrations
 {
     [DbContext(typeof(ReadHubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230310104510_removeUser")]
+    partial class removeUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,8 +206,8 @@ namespace ReadHubWeb.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Genre")
                         .HasColumnType("int");
@@ -420,7 +422,7 @@ namespace ReadHubWeb.Data.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b2fc615-eaa2-4826-bf8a-ffb7403b1246",
+                            ConcurrencyStamp = "3c2990d4-0345-471d-807e-5f4a1bae553f",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Owner",
@@ -429,9 +431,9 @@ namespace ReadHubWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB4eFkrpi7vBl69UXMsKD3+vxM+5lfF4PJ2emzn447g0eV3+VkGg5zLrPK0IFt3adQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC59i0zmQc3abol6px/c/eW+Crc/AwGDU/91ltgSs8e1+jGY+5MAnW9NVbyZG7oC2w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b9fbfe8c-379c-4cda-91a9-dccda8b3bd94",
+                            SecurityStamp = "fd8b005e-92ff-41da-b315-5c21d20e8220",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

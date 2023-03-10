@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadHub.Core;
 
@@ -11,9 +12,10 @@ using ReadHub.Core;
 namespace ReadHubWeb.Data.Migrations
 {
     [DbContext(typeof(ReadHubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230310081020_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,6 +169,9 @@ namespace ReadHubWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -180,6 +185,9 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -202,10 +210,16 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Genre")
                         .HasColumnType("int");
@@ -245,6 +259,18 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<int>("TypeBook")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId2")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
@@ -259,6 +285,12 @@ namespace ReadHubWeb.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasIndex("UserId2");
+
                     b.ToTable("Books");
                 });
 
@@ -269,6 +301,12 @@ namespace ReadHubWeb.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -289,6 +327,9 @@ namespace ReadHubWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -298,6 +339,9 @@ namespace ReadHubWeb.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
@@ -322,8 +366,17 @@ namespace ReadHubWeb.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Raiting")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -349,6 +402,12 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -399,6 +458,9 @@ namespace ReadHubWeb.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -420,7 +482,9 @@ namespace ReadHubWeb.Data.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b2fc615-eaa2-4826-bf8a-ffb7403b1246",
+                            ConcurrencyStamp = "49ac0ada-4802-48ac-b0f8-dcc461d337cb",
+                            CreatedTime = new DateTime(2023, 3, 10, 10, 10, 19, 637, DateTimeKind.Local).AddTicks(3461),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Owner",
@@ -429,10 +493,11 @@ namespace ReadHubWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB4eFkrpi7vBl69UXMsKD3+vxM+5lfF4PJ2emzn447g0eV3+VkGg5zLrPK0IFt3adQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEKg8W5zbTIe7xpN0jDVNigtlbI2+O38twwsCnsBjawrnMGB18+IhwE29uWP2jz3Tg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b9fbfe8c-379c-4cda-91a9-dccda8b3bd94",
+                            SecurityStamp = "50688457-d115-415f-90db-f343b3bb422a",
                             TwoFactorEnabled = false,
+                            UpdatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "admin@mail.com"
                         });
                 });
@@ -515,6 +580,18 @@ namespace ReadHubWeb.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("EBooks")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("Favorite")
+                        .HasForeignKey("UserId1");
+
+                    b.HasOne("ReadHub.Core.Data.User", null)
+                        .WithMany("MyCart")
+                        .HasForeignKey("UserId2");
+
                     b.Navigation("Author");
 
                     b.Navigation("Publisher");
@@ -523,7 +600,7 @@ namespace ReadHubWeb.Data.Migrations
             modelBuilder.Entity("ReadHub.Core.Data.Entities.Order", b =>
                 {
                     b.HasOne("ReadHub.Core.Data.User", "User")
-                        .WithMany()
+                        .WithMany("MyOrders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -540,7 +617,7 @@ namespace ReadHubWeb.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("ReadHub.Core.Data.User", "User")
-                        .WithMany()
+                        .WithMany("MyReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -568,6 +645,19 @@ namespace ReadHubWeb.Data.Migrations
             modelBuilder.Entity("ReadHub.Core.Data.Entities.Publisher", b =>
                 {
                     b.Navigation("PublishedBooks");
+                });
+
+            modelBuilder.Entity("ReadHub.Core.Data.User", b =>
+                {
+                    b.Navigation("EBooks");
+
+                    b.Navigation("Favorite");
+
+                    b.Navigation("MyCart");
+
+                    b.Navigation("MyOrders");
+
+                    b.Navigation("MyReviews");
                 });
 #pragma warning restore 612, 618
         }

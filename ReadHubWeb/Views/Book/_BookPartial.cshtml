@@ -1,0 +1,35 @@
+﻿@using ReadHub.Core.Services.Book.Models;
+@model BookServiceModel
+
+<div class="col-md-2">
+	<div class="card mb-3">
+		<img class="card-img-top" src="@Model.ImageUrlLink" alt="Book Image">
+		<div class="card-body text-center">
+			<h4>@Model.Title</h4>
+			<p>Author: <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@Model.AuthorId">@Model.AuthorFullName</a></p>
+			<p>Publisher: <a asp-controller="Publisher" asp-action="PublisherDetails" asp-route-id="@Model.PublisherId">@Model.PublisherName</a></p>
+			<br />
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<form class="input-group" asp-controller="Book"
+					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
+					<input class="btn btn-light" type="submit" value="ℹ️" />
+				</form>
+				<form class="input-group" asp-controller="Book"
+					  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
+					<input class="btn btn-light" type="submit" value="🛒" />
+				</form>
+				<form class="input-group" asp-controller="Book"
+					  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
+					<input class="btn btn-light" type="submit" value="❤️" />
+				</form>
+			</div>
+			<p></p>
+			<p>Price: @Model.Price BGN</p>
+			<form class="input-group-sm" asp-controller="Book"
+				  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
+				<input class="btn btn-primary" type="submit" value="❌" />
+			</form>			
+		</div>
+	</div>
+</div>
+

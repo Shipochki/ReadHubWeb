@@ -28,20 +28,9 @@ namespace ReadHub.Web.Controllers
 		{
 			var authorId = await this.adminService.CreateAuthor(model);
 
-			return RedirectToAction(nameof(AuthorDetails), new { authorId });
+			return RedirectToAction("AuthorDetails", "Author", new { authorId });
 		}
 
-		[HttpGet]
-		public IActionResult AuthorDetails()
-		{
-			return View();
-		}
-
-		[HttpGet]
-		public IActionResult AllAuthors()
-		{
-			return View();
-		}
 
 		public IActionResult AddPublisher()
 		{
@@ -53,18 +42,8 @@ namespace ReadHub.Web.Controllers
 		{
 			var publisherId = await this.adminService.CreatePublisher(model);
 
-			return RedirectToAction(nameof(PublisherDetails), new { publisherId });
+			return RedirectToAction("PublisherDetails", "Publisher" ,new { publisherId });
 		}
 
-		public IActionResult PublisherDetails()
-		{
-			return View();
-		}
-
-		[HttpGet]
-		public IActionResult AllPublishers()
-		{
-			return View();
-		}
 	}
 }
