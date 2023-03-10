@@ -30,9 +30,19 @@ namespace ReadHub.Core
 			return author.Id;
 		}
 
-		public Task<int> CreatePublisher(PublisherServiceModel model)
+		public async Task<int> CreatePublisher(PublisherCreateServiceModel model)
 		{
-			throw new NotImplementedException();
+			var publisher = new Publisher
+			{
+				Name = model.Name,
+				Year = model.Year,
+				Description = model.Description,
+			};
+
+			await this.context.Publisher.AddAsync(publisher);
+			await this.context.SaveChangesAsync();
+
+			return publisher.Id;
 		}
 	}
 }

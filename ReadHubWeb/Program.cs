@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReadHub.Core;
 using ReadHub.Core.Data;
+using ReadHub.Core.Services.Admin;
 using ReadHub.Core.Services.Author;
 using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Publisher;
@@ -33,6 +34,10 @@ builder.Services.AddControllersWithViews(options =>
 });
 
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IAdminService, AdminService>();
+builder.Services.AddTransient<IAuthorService, AuthorService>();
+builder.Services.AddTransient<IPublisherService, PublisherService>();
+builder.Services.AddTransient<IReviewService, ReviewService>();
 
 var app = builder.Build();
 

@@ -7,6 +7,6 @@ namespace ReadHub.Core.Services.Admin
 	{
 		Task<int> CreateAuthor(AuthorCreateServiceModel model);
 
-		Task<int> CreatePublisher(PublisherServiceModel model);
+		Task<int> CreatePublisher(PublisherCreateServiceModel model);
 	}
 }

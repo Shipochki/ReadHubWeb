@@ -2,16 +2,18 @@
 using ReadHub.Core.Services.Book;
 using System.Diagnostics;
 using ReadHub.Core.Services.Book.Models;
+using ReadHub.Core.Services.Author;
 
 namespace ReadHub.Web.Controllers
 {
 	public class BookController : Controller
 	{
 		private readonly IBookService books;
-
-		public BookController(IBookService _bookService)
+		private readonly IAuthorService author;
+		public BookController(IBookService _bookService, IAuthorService _author)
 		{
 			this.books = _bookService;
+			this.author = _author;
 		}
 
 		[HttpGet]
@@ -64,9 +66,12 @@ namespace ReadHub.Web.Controllers
 			return View();
 		}
 
-		public IActionResult Add()
+		public async Task<IActionResult> Add()
 		{
-			return View(new BookCreateServiceModel());
+			return View(new BookCreateServiceModel()
+			{
+				Authors = await this.author.GetAllAuthors(),
+			});
 		}
 
 		[HttpPost]

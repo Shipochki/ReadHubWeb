@@ -1,4 +1,5 @@
-﻿using ReadHub.Core.Services.Author.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ReadHub.Core.Services.Author.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,20 @@ namespace ReadHub.Core.Services.Author
             this.context = _context;
         }
 
-        public async Task<AuthorServiceModel> GetAuthorById(int authorId)
+		public async Task<IEnumerable<AuthorServiceModel>> GetAllAuthors()
+		{
+			return await this.context
+                .Authors
+                .Select(x => new AuthorServiceModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                })
+                .ToListAsync();
+		}
+
+		public async Task<AuthorServiceModel> GetAuthorById(int authorId)
         {
             var author = await this.context.Authors.FindAsync(authorId);
 
