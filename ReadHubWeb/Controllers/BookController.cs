@@ -8,6 +8,8 @@ using ReadHub.Core.Services.Order;
 using ReadHub.Core;
 using HouseRentingSystem.Infranstructure;
 using Microsoft.AspNetCore.Authorization;
+using ReadHub.Core.Services.Review.Models;
+using ReadHub.Core.Services.Review;
 
 namespace ReadHub.Web.Controllers
 {
@@ -17,16 +19,19 @@ namespace ReadHub.Web.Controllers
 		private readonly IAuthorService author;
 		private readonly IPublisherService publisher;
 		private readonly IOrderService order;
+		private readonly IReviewService review;
 
 		public BookController(IBookService _bookService, 
 			IAuthorService _author, 
 			IPublisherService _publisher,
-			IOrderService _order)
+			IOrderService _order,
+			IReviewService _review)
 		{
 			this.books = _bookService;
 			this.author = _author;
 			this.publisher = _publisher;
 			this.order = _order;
+			this.review = _review;
 		}
 
 		[HttpGet]
@@ -131,8 +136,6 @@ namespace ReadHub.Web.Controllers
 
 			var result = await order.AddToCart(book, this.User.Id());
 
-			TempData["message"] = "You have sucssessfuly add a Book to cart!";
-
 			return RedirectToAction(nameof(Details), new { id });
 		}
 
@@ -178,6 +181,25 @@ namespace ReadHub.Web.Controllers
 			await this.books.DeleteOrderById(id);
 
 			return RedirectToAction(nameof(Details), new { id });
+		}
+
+		[HttpGet]
+		[Authorize]
+		public async Task<IActionResult> AddReview(int id)
+		{
+			var review = new ReviewFormCreateModel();
+			review.Books = await this.books.All();
+			return View(review);
+		}
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> AddReview(ReviewFormCreateModel model)
+		{
+
+			var bookId = await this.review.CreateReview(model, this.User.Id());
+
+			return RedirectToAction(nameof(Details), new { bookId });
 		}
 	}
 }

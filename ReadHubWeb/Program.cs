@@ -75,6 +75,11 @@ app.UseEndpoints(endpoints =>
 		pattern: "/Book/Edit/{id}/{information}",
 		defaults: new { Controller = "Book", Action = "Edit" });
 
+	endpoints.MapControllerRoute(
+		name: "Book AddReview",
+		pattern: "/Book/AddReview/{id}/{information}",
+		defaults: new { Controller = "Book", Action = "AddReview" });
+
 	endpoints.MapDefaultControllerRoute();
 	endpoints.MapRazorPages();
 });

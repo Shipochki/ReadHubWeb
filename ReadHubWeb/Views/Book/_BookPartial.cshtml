@@ -14,10 +14,20 @@
 					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
 					<input class="btn btn-light" type="submit" value="ℹ️" />
 				</form>
-				<form class="input-group" asp-controller="Book"
+				@if (Model.OrderId != null)
+				{
+					<form class="input-group" asp-controller="Book"
+					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
+						<input class="btn btn-light" type="submit" value="Sold" />
+					</form>
+				}
+				else
+				{
+					<form class="input-group" asp-controller="Book"
 					  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
-					<input class="btn btn-light" type="submit" value="🛒" />
-				</form>
+						<input class="btn btn-light" type="submit" value="🛒" />
+					</form>
+				}
 				<form class="input-group" asp-controller="Book"
 					  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
 					<input class="btn btn-light" type="submit" value="❤️" />
@@ -28,7 +38,7 @@
 			<form class="input-group-sm" asp-controller="Book"
 				  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
 				<input class="btn btn-primary" type="submit" value="❌" />
-			</form>			
+			</form>
 		</div>
 	</div>
 </div>

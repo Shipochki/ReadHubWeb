@@ -9,6 +9,9 @@ namespace ReadHub.Core.Services.Review
 {
     public interface IReviewService
     {
-        public Task<IEnumerable<ReviewModelService>> AllWithIdBook(int bookId);
-    }
+        public Task<IEnumerable<ReviewDetailsServiceModel>> AllWithIdBook(int bookId);
+
+        public Task<int> CreateReview(ReviewFormCreateModel model, string userId);
+
+	}
 }

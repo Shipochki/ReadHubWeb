@@ -5,6 +5,7 @@ using ReadHub.Core.Services.Author;
 using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Book.Models;
 using ReadHub.Core.Services.Publisher;
+using ReadHub.Core.Services.Review;
 
 namespace ReadHub.Core
 {
@@ -13,12 +14,18 @@ namespace ReadHub.Core
 		private readonly ReadHubDbContext context;
 		private readonly IAuthorService author;
 		private readonly IPublisherService publisher;
+		private readonly IReviewService review;
 
-		public BookService(ReadHubDbContext _context, IAuthorService _author, IPublisherService _publisher)
+		public BookService(
+			ReadHubDbContext _context, 
+			IAuthorService _author, 
+			IPublisherService _publisher,
+			IReviewService _review)
 		{
 			this.context = _context;
 			this.author = _author;
 			this.publisher = _publisher;
+			this.review = _review;
 		}
 
 		public async Task<IEnumerable<BookServiceModel>> All()
@@ -39,7 +46,8 @@ namespace ReadHub.Core
 					Price = b.Price,
 					Genre = b.Genre,
 					Year = b.Year,
-					TypeBook = b.TypeBook
+					TypeBook = b.TypeBook,
+					OrderId = b.OrderId
 				})
 				.ToListAsync();
 		}
@@ -103,6 +111,7 @@ namespace ReadHub.Core
 
 			var publisherName = await this.publisher.GetPublisherById(book.PublisherId);
 			var author = await this.author.GetAuthorById(book.AuthorId);
+			var review = await this.review.AllWithIdBook(bookId);
 
 			var result = new BookServiceModel
 			{
@@ -117,7 +126,9 @@ namespace ReadHub.Core
 				Price = book.Price,
 				Genre = book.Genre,
 				TypeBook = book.TypeBook,
-				Year = book.Year
+				Year = book.Year,
+				OrderId= book.OrderId,
+				Reviews = review
 			};
 
 			return result;
@@ -181,12 +192,15 @@ namespace ReadHub.Core
 					PublisherId = b.PublisherId,
 					ImageUrlLink = b.ImageUrlLink,
 					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
+					AuthorId= b.AuthorId,
+					ReaderUrlLink= b.ReaderUrlLink,
 					Language = b.Language,
 					Nationality = b.Nationality,
 					Price = b.Price,
 					Genre = b.Genre,
 					TypeBook = b.TypeBook,
-					Year = b.Year
+					Year = b.Year,
+					OrderId= orderId
 				})
 				.ToListAsync();
 

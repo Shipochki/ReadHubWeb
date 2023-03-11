@@ -121,7 +121,18 @@ namespace ReadHub.Core
 		public async Task DeleteBookFromOrder(int order,int bookId)
 		{
 			var currentOrder = await this.context.Orders.FindAsync(order);
+
+			if(currentOrder== null)
+			{
+				return;
+			}
+
 			var book = await this.context.Books.FindAsync(bookId);
+
+			if(book==null)
+			{
+				return;
+			}
 
 			currentOrder.OrderedBooks.Remove(book);
 
