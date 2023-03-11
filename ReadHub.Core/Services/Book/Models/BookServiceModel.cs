@@ -21,6 +21,8 @@ namespace ReadHub.Core.Services.Book.Models
 
         public string ImageUrlLink { get; set; } = null!;
 
+        public string ReaderUrlLink { get; set; } = null!;
+
         public string AuthorFullName { get; set; } = null!;
 
         public int AuthorId { get; set; }

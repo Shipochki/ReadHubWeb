@@ -4,6 +4,9 @@ using System.Diagnostics;
 using ReadHub.Core.Services.Book.Models;
 using ReadHub.Core.Services.Author;
 using ReadHub.Core.Services.Publisher;
+using ReadHub.Core.Services.Order;
+using ReadHub.Core;
+using HouseRentingSystem.Infranstructure;
 
 namespace ReadHub.Web.Controllers
 {
@@ -12,11 +15,17 @@ namespace ReadHub.Web.Controllers
 		private readonly IBookService books;
 		private readonly IAuthorService author;
 		private readonly IPublisherService publisher;
-		public BookController(IBookService _bookService, IAuthorService _author, IPublisherService _publisher)
+		private readonly IOrderService order;
+
+		public BookController(IBookService _bookService, 
+			IAuthorService _author, 
+			IPublisherService _publisher,
+			IOrderService _order)
 		{
 			this.books = _bookService;
 			this.author = _author;
 			this.publisher = _publisher;
+			this.order = _order;
 		}
 
 		[HttpGet]
@@ -28,7 +37,7 @@ namespace ReadHub.Web.Controllers
 				Books = books
 			};
 
-			return View(result);
+			return View("All", result);		
 		}
 
 		[HttpGet]
@@ -105,17 +114,29 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult AddCart(int id)
+		public async Task<IActionResult> AddCart(int id)
 		{
-			return View();
+			var book = await this.books.DetailsById(id);
+
+			var result = await order.AddToCart(book, this.User.Id());
+
+			return RedirectToAction(nameof(Details), new { id });
 		}
 
 		[HttpGet]
-		public IActionResult MyCart(int id)
+		public async Task<IActionResult> MyCart(int id)
 		{
-			return View();
+			var model = await order.GetOrderById(id);
+
+			if (model == null)
+			{
+				return BadRequest();
+			}
+
+			return View("MyCart", model);
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
 			return View(new BookCreateServiceModel()

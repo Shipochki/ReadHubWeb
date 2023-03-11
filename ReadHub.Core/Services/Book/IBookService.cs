@@ -11,6 +11,7 @@ namespace ReadHub.Core.Services.Book
 
         Task<BookDetailServiceModel> FindBookById(int bookId);
 
+
         Task<int> Create(BookCreateServiceModel model);
 
         Task<BookDeleteView> Delete(int bookId);

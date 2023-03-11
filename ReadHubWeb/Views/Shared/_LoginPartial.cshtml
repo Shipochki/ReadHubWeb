@@ -1,11 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using ReadHub.Core.Data;
+@using ReadHub.Core.Services.Order.Models;
+
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    <button type="button" class="btn btn-primary position-relative">
+            🛒
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    @Model.OrderedBooks.Count
+    <span class="visually-hidden">unread messages</span>
+  </span>
+</button>
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
