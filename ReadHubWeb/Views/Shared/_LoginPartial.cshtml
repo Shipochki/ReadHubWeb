@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using HouseRentingSystem.Infranstructure;
+@using Microsoft.AspNetCore.Identity
 @using ReadHub.Core.Data;
 @using ReadHub.Core.Services.Order.Models;
 
@@ -6,31 +7,30 @@
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <button type="button" class="btn btn-primary position-relative">
-            🛒
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    @Model.OrderedBooks.Count
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</button>
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<li class="nav-item">
+			<form class="input-group" asp-controller="Book"
+			  asp-area="" asp-action="MyCart" asp-route-id="@this.User.Id()" method="get">
+				<input class="btn btn-light" type="submit" value="🛒" />
+			</form>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+		</li>
+		<li class="nav-item">
+			<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+				<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+			</form>
+		</li>
+	}
+	else
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+		</li>
+	}
 </ul>

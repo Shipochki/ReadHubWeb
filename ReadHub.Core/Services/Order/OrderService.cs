@@ -3,6 +3,7 @@ using ReadHub.Core.Services.Order;
 using ReadHub.Core.Services.Book.Models;
 using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Order.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReadHub.Core
 {
@@ -23,29 +24,14 @@ namespace ReadHub.Core
 
 			foreach (var book in model.OrderedBooks)
 			{
-				var correctBook = await this.books.DetailsById(book.Id);
+				var correctBook = await this.context.Books.FindAsync(book.Id);
 
-				var newBook = new Book
-				{
-					Id = correctBook.Id,
-					Title = correctBook.Title,
-					Description = correctBook.Description,
-					PublisherId = correctBook.PublisherId,
-					ImageUrlLink = correctBook.ImageUrlLink,
-					AuthorId = correctBook.AuthorId,
-					Language = correctBook.Language,
-					Nationality = correctBook.Nationality,
-					Price = correctBook.Price,
-					Genre = correctBook.Genre,
-					Year = correctBook.Year,
-					TypeBook = correctBook.TypeBook
-				};
-
-				curentBooks.Add(newBook);
+				curentBooks.Add(correctBook);
 			}
 
 			var order = new Order()
 			{
+				UserId = model.UserId,
 				OrderedBooks = curentBooks
 			};
 
@@ -71,39 +57,19 @@ namespace ReadHub.Core
 			return id;
 		}
 
-		public async Task<OrderServiceModel> GetOrderById(int id)
+		public async Task<OrderServiceModel> GetOrderByUserId(string id)
 		{
-			var newOrder = await this.context.Orders.FindAsync(id);
+			var newOrder = await this.context.
+				Orders
+				.Where(o => o.UserId == id)
+				.FirstOrDefaultAsync();
 
 			if(newOrder == null)
 			{
 				return null;
 			}
 
-			var curentBooks = new List<BookServiceModel>();
-
-			foreach (var book in newOrder.OrderedBooks)
-			{
-				var correctBook = await this.books.DetailsById(book.Id);
-
-				var newBook = new BookServiceModel
-				{
-					Id = correctBook.Id,
-					Title = correctBook.Title,
-					Description = correctBook.Description,
-					PublisherId = correctBook.PublisherId,
-					ImageUrlLink = correctBook.ImageUrlLink,
-					AuthorId = correctBook.AuthorId,
-					Language = correctBook.Language,
-					Nationality = correctBook.Nationality,
-					Price = correctBook.Price,
-					Genre = correctBook.Genre,
-					Year = correctBook.Year,
-					TypeBook = correctBook.TypeBook
-				};
-
-				curentBooks.Add(newBook);
-			}
+			var curentBooks = await this.books.GetAllBooksByOrderId(newOrder.Id);
 
 			return new OrderServiceModel()
 			{

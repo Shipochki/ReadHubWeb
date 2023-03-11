@@ -14,12 +14,12 @@
 					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
 					<input class="btn btn-light" type="submit" value="ℹ️" />
 				</form>
+				<form class="input-group-sm" asp-controller="Order"
+					  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
+					<input class="btn btn-primary" type="submit" value="❌" />
+				</form>
+			</div>
 			<p>Price: @Model.Price BGN</p>
-			<form class="input-group-sm" asp-controller="Order"
-				  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
-				<input class="btn btn-primary" type="submit" value="❌" />
-			</form>
 		</div>
 	</div>
 </div>
-

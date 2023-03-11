@@ -58,6 +58,10 @@ namespace ReadHub.Core.Data.Entities
 
         public bool isActive { get; set; } = true;
 
+        [ForeignKey(nameof(Order))]
+        public int? OrderId { get; set; }
+        public Order? Order { get; set; }
+
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

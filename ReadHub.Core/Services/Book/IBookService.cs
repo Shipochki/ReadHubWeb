@@ -11,6 +11,7 @@ namespace ReadHub.Core.Services.Book
 
         Task<BookDetailServiceModel> FindBookById(int bookId);
 
+        Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId);
 
         Task<int> Create(BookCreateServiceModel model);
 

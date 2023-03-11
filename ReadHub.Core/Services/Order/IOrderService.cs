@@ -7,7 +7,7 @@ namespace ReadHub.Core.Services.Order
 	{
 		Task<int> AddOrder(OrderServiceModel model);
 
-		Task<OrderServiceModel> GetOrderById(int id);
+		Task<OrderServiceModel> GetOrderByUserId(string id);
 
 		Task<int> AddToCart(BookServiceModel book, string userId);
 	}

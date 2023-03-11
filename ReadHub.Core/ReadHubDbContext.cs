@@ -28,6 +28,7 @@ namespace ReadHub.Core
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
 			this.Admin = new User()
             {
                 Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",

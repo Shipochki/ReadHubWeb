@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadHub.Core;
 
@@ -11,9 +12,10 @@ using ReadHub.Core;
 namespace ReadHubWeb.Data.Migrations
 {
     [DbContext(typeof(ReadHubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230311095058_OrderIdInBook")]
+    partial class OrderIdInBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,7 +226,7 @@ namespace ReadHubWeb.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int?>("OrderIrd")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -255,7 +257,7 @@ namespace ReadHubWeb.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderIrd");
 
                     b.HasIndex("PublisherId");
 
@@ -420,7 +422,7 @@ namespace ReadHubWeb.Data.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a8606ed-3838-47e3-b9bb-90bb800d09a4",
+                            ConcurrencyStamp = "77ec0d50-1a4d-46b0-8abc-7a3b42b79048",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Owner",
@@ -429,9 +431,9 @@ namespace ReadHubWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIxE3wcofxK4ByF9J1iZsofeFtmgUbh5V70nd1IXOnIEmaEViu43OIA/hRwGJXHnkQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECIA9eKp9NyYBGjjO+aN2t0lJjCu1/Ud6sILHgO38lSkdZXOCMOtWYh8p8YmugxJtQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f4ec1a9f-36de-4d3b-8b49-6b27e1b20de2",
+                            SecurityStamp = "52b2d117-0000-497c-93ae-0b9dc7a71e20",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -507,7 +509,7 @@ namespace ReadHubWeb.Data.Migrations
 
                     b.HasOne("ReadHub.Core.Data.Entities.Order", "Order")
                         .WithMany("OrderedBooks")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderIrd");
 
                     b.HasOne("ReadHub.Core.Data.Entities.Publisher", "Publisher")
                         .WithMany("PublishedBooks")

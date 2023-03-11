@@ -23,8 +23,4 @@
     <ProjectReference Include="..\ReadHub.Core\ReadHub.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\" />
-  </ItemGroup>
-
 </Project>

@@ -6,6 +6,6 @@ namespace ReadHub.Core.Services.Order.Models
 	{
 		public string UserId { get; set; } = null!;
 
-		public ICollection<BookServiceModel> OrderedBooks { get; set; } = new List<BookServiceModel>();
+		public IEnumerable<BookServiceModel> OrderedBooks { get; set; } = new List<BookServiceModel>();
 	}
 }

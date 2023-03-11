@@ -157,5 +157,31 @@ namespace ReadHub.Core
 
 			return result;
 		}
-	}
+
+        public async Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId)
+        {
+			var books = await this.context
+				.Books
+				.Where(b => b.OrderId == orderId)
+				.Select(b => new BookServiceModel
+				{
+					Id = b.Id,
+					Title = b.Title,
+					Description = b.Description,
+					PublisherName = b.Publisher.Name,
+					PublisherId = b.PublisherId,
+					ImageUrlLink = b.ImageUrlLink,
+					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
+					Language = b.Language,
+					Nationality = b.Nationality,
+					Price = b.Price,
+					Genre = b.Genre,
+					TypeBook = b.TypeBook,
+					Year = b.Year
+				})
+				.ToListAsync();
+
+			return books;
+        }
+    }
 }

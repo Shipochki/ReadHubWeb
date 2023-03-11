@@ -7,6 +7,7 @@ using ReadHub.Core.Services.Publisher;
 using ReadHub.Core.Services.Order;
 using ReadHub.Core;
 using HouseRentingSystem.Infranstructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReadHub.Web.Controllers
 {
@@ -114,9 +115,15 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> AddCart(int id)
 		{
 			var book = await this.books.DetailsById(id);
+
+			if(book == null)
+			{
+				return BadRequest();
+			}
 
 			var result = await order.AddToCart(book, this.User.Id());
 
@@ -124,9 +131,15 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> MyCart(int id)
+		[Authorize]
+		public async Task<IActionResult> MyCart(string id)
 		{
-			var model = await order.GetOrderById(id);
+			var model = await order.GetOrderByUserId(id);
+
+			if(this.User.Id() != id)
+			{
+				return Unauthorized();
+			}
 
 			if (model == null)
 			{
