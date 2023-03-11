@@ -127,6 +127,8 @@ namespace ReadHub.Web.Controllers
 
 			var result = await order.AddToCart(book, this.User.Id());
 
+			TempData["message"] = "You have sucssessfuly add a Book to cart!";
+
 			return RedirectToAction(nameof(Details), new { id });
 		}
 
@@ -139,11 +141,6 @@ namespace ReadHub.Web.Controllers
 			if(this.User.Id() != id)
 			{
 				return Unauthorized();
-			}
-
-			if (model == null)
-			{
-				return BadRequest();
 			}
 
 			return View("MyCart", model);

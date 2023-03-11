@@ -12,5 +12,11 @@ namespace ReadHub.Web.Controllers
 			this.order = _order;
 		}
 
+		public IActionResult DeleteFromCart(int orderId, int bookId) 
+		{
+			var currentOrder = this.order
+
+			return RedirectToAction("MyCart", "Book", orderId);
+		}
 	}
 }

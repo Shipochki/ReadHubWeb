@@ -48,13 +48,53 @@ namespace ReadHub.Core
 				book
 			};
 
-			var id = await AddOrder(new OrderServiceModel()
+			if (!IsContainOrder(userId))
 			{
-				UserId= userId,
-				OrderedBooks = list
-			});
+				var current = await AddOrder(new OrderServiceModel()
+				{
+					UserId = userId,
+					OrderedBooks = list
+				});
 
+				return current;
+			}
+
+			var id = await AddToOrder(book, userId);
 			return id;
+		}
+
+		private async Task<int> AddToOrder(BookServiceModel book, string userId)
+		{
+			var order = await this.context.Orders
+				.Where(o => o.UserId == userId)
+				.FirstOrDefaultAsync();
+
+			if(order == null)
+			{
+				return -1;
+			}
+
+			var bookToAdd = await this.context.Books.FindAsync(book.Id);
+
+			order.OrderedBooks.Add(bookToAdd);
+
+			await this.context.SaveChangesAsync();
+
+			return bookToAdd.Id;
+		}
+
+		private bool IsContainOrder(string userId)
+		{
+			var order = this.context.Orders
+				.Where(o => o.UserId == userId)
+				.FirstOrDefault();
+
+			if(order == null)
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		public async Task<OrderServiceModel> GetOrderByUserId(string id)
@@ -64,18 +104,18 @@ namespace ReadHub.Core
 				.Where(o => o.UserId == id)
 				.FirstOrDefaultAsync();
 
-			if(newOrder == null)
+			if (newOrder == null)
 			{
 				return null;
 			}
 
-			var curentBooks = await this.books.GetAllBooksByOrderId(newOrder.Id);
-
-			return new OrderServiceModel()
+			var order = new OrderServiceModel()
 			{
 				UserId = newOrder.UserId,
-				OrderedBooks = curentBooks
+				OrderedBooks = await this.books.GetAllBooksByOrderId(newOrder.Id)
 			};
+
+			return order;
 		}
 	}
 }

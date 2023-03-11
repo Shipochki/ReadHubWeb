@@ -10,14 +10,17 @@
 <hr />
 
 
-@if (!Model.OrderedBooks.Any())
+@if (Model == null || !Model.OrderedBooks.Any())
 {
 		<h2 class="text-center">No Books in your cart!</h2>
 }
 
 <div class="row">
-	@foreach (var cart in Model.OrderedBooks)
+	@if (Model != null)
 	{
-		<partial name="_MyCartPartial" model="@cart" />
+		@foreach (var cart in Model.OrderedBooks)
+		{
+			<partial name="_MyCartPartial" model="@cart" />
+		}
 	}
 </div>
