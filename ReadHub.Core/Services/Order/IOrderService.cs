@@ -10,5 +10,9 @@ namespace ReadHub.Core.Services.Order
 		Task<OrderServiceModel> GetOrderByUserId(string id);
 
 		Task<int> AddToCart(BookServiceModel book, string userId);
+
+		Task DeleteBookFromOrder(int order, int bookId);
+
+		int GetOrderId(string userId);
 	}
 }

@@ -1,4 +1,5 @@
-﻿@using ReadHub.Core.Services.Book.Models;
+﻿@using HouseRentingSystem.Infranstructure;
+@using ReadHub.Core.Services.Book.Models;
 @model BookServiceModel
 
 <div class="col-md-2">
@@ -14,9 +15,9 @@
 					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
 					<input class="btn btn-light" type="submit" value="ℹ️" />
 				</form>
-				<form class="input-group-sm" asp-controller="Order"
-					  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
-					<input class="btn btn-primary" type="submit" value="❌" />
+				<form class="input-group-sm" asp-controller="Book"
+					  asp-area="" asp-action="Remove" asp-route-id="@Model.Id" method="post">
+					<input class="btn btn-light" type="submit" value="❌" />
 				</form>
 			</div>
 			<p>Price: @Model.Price BGN</p>

@@ -18,5 +18,8 @@ namespace ReadHub.Core.Services.Book
         Task<BookDeleteView> Delete(int bookId);
 
         Task Edit(int bookId, BookCreateServiceModel model);
-    }
+
+        Task DeleteOrderById(int bookId);
+
+	}
 }

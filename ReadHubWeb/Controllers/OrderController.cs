@@ -1,22 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Order;
 
 namespace ReadHub.Web.Controllers
 {
 	public class OrderController : Controller
 	{
-		private readonly IOrderService order;
+		private readonly IOrderService orders;
+		private readonly IBookService books;
 
-		public OrderController(IOrderService _order)
+		public OrderController(IOrderService _order, IBookService _book)
 		{
-			this.order = _order;
-		}
-
-		public IActionResult DeleteFromCart(int orderId, int bookId) 
-		{
-			var currentOrder = this.order
-
-			return RedirectToAction("MyCart", "Book", orderId);
+			this.orders = _order;
+			this.books = _book;
 		}
 	}
 }

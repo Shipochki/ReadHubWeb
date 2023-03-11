@@ -83,6 +83,15 @@ namespace ReadHub.Core
 			};
 		}
 
+		public async Task DeleteOrderById(int bookId)
+		{
+			var book = await this.context.Books.FindAsync(bookId);
+
+			book.OrderId = null;
+
+			await this.context.SaveChangesAsync();
+		}
+
 		public async Task<BookServiceModel> DetailsById(int bookId)
 		{
 			var book = await this.context.Books.FindAsync(bookId);

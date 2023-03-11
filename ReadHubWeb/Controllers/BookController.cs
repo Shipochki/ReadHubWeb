@@ -55,6 +55,7 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var book = await books.FindBookById(id);
@@ -80,6 +81,7 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> Edit(int id, BookCreateServiceModel model)
 		{
 			await this.books.Edit(id, model);
@@ -88,6 +90,7 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var book = await this.books.FindBookById(id);
@@ -101,6 +104,7 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> Delete(BookDeleteView model)
 		{
 			var book = await this.books.Delete(model.Id);
@@ -147,6 +151,7 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> Add()
 		{
 			return View(new BookCreateServiceModel()
@@ -157,11 +162,22 @@ namespace ReadHub.Web.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> Add(BookCreateServiceModel model)
 		{
 			var bookId = await this.books.Create(model);
 
 			return RedirectToAction(nameof(Details), new { bookId });
+		}
+
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> Remove(int id)
+		{
+			await this.books.DeleteOrderById(id);
+
+			return RedirectToAction(nameof(Details), new { id });
 		}
 	}
 }
