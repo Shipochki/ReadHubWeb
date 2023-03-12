@@ -13,7 +13,7 @@ namespace ReadHub.Core
         public ReadHubDbContext(DbContextOptions<ReadHubDbContext> options)
             : base(options)
         {
-            //this.Database.Migrate();
+            this.Database.Migrate();
         }
 
         public DbSet<Author> Authors { get; set; }
@@ -26,8 +26,22 @@ namespace ReadHub.Core
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<Favorite> Favorites { get; set; }
+
+        public DbSet<VirtualBook> VirtualBooks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Cart>()
+                .HasMany<VirtualBook>();
+
+            builder.Entity<Favorite>()
+                .HasMany<VirtualBook>();
+
+            builder.Entity<Order>()
+                .HasMany<VirtualBook>();
 
 			this.Admin = new User()
             {

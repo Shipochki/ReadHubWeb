@@ -7,8 +7,6 @@
 		<img class="card-img-top" src="@Model.ImageUrlLink" alt="Book Image">
 		<div class="card-body text-center">
 			<h4>@Model.Title</h4>
-			<p>Author: <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@Model.AuthorId">@Model.AuthorFullName</a></p>
-			<p>Publisher: <a asp-controller="Publisher" asp-action="PublisherDetails" asp-route-id="@Model.PublisherId">@Model.PublisherName</a></p>
 			<br />
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<form class="input-group" asp-controller="Book"
@@ -20,7 +18,8 @@
 					<input class="btn btn-light" type="submit" value="❌" />
 				</form>
 			</div>
-			<p>Price: @Model.Price BGN</p>
+			<br />
+			<p>Price: <b>@Model.Price</b> BGN</p>
 		</div>
 	</div>
 </div>

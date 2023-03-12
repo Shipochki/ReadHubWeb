@@ -134,7 +134,7 @@ namespace ReadHub.Web.Controllers
 				return BadRequest();
 			}
 
-			var result = await order.AddToCart(book, this.User.Id());
+			//var result = await order.AddToCart(book, this.User.Id());
 
 			return RedirectToAction(nameof(Details), new { id });
 		}

@@ -47,7 +47,6 @@ namespace ReadHub.Core
 					Genre = b.Genre,
 					Year = b.Year,
 					TypeBook = b.TypeBook,
-					OrderId = b.OrderId
 				})
 				.ToListAsync();
 		}
@@ -95,7 +94,6 @@ namespace ReadHub.Core
 		{
 			var book = await this.context.Books.FindAsync(bookId);
 
-			book.OrderId = null;
 
 			await this.context.SaveChangesAsync();
 		}
@@ -127,7 +125,6 @@ namespace ReadHub.Core
 				Genre = book.Genre,
 				TypeBook = book.TypeBook,
 				Year = book.Year,
-				OrderId= book.OrderId,
 				Reviews = review
 			};
 
@@ -182,7 +179,6 @@ namespace ReadHub.Core
         {
 			var books = await this.context
 				.Books
-				.Where(b => b.OrderId == orderId)
 				.Select(b => new BookServiceModel
 				{
 					Id = b.Id,
