@@ -1,6 +1,6 @@
-﻿@using ReadHub.Core.Services.Order.Models;
+﻿@using ReadHub.Core.Services.Cart.Models;
 
-@model OrderServiceModel
+@model CartServiceModel
 
 @{
 	ViewBag.Title = "My Cart";
@@ -10,7 +10,7 @@
 <hr />
 
 
-@if (Model == null || !Model.OrderedBooks.Any())
+@if (Model == null || !Model.BooksInCart.Any())
 {
 		<h2 class="text-center">No Books in your cart!</h2>
 }
@@ -18,7 +18,7 @@
 <div class="row">
 	@if (Model != null)
 	{
-		@foreach (var cart in Model.OrderedBooks)
+		@foreach (var cart in Model.BooksInCart)
 		{
 			<partial name="_MyCartPartial" model="@cart" />
 		}

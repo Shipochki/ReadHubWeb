@@ -20,67 +20,17 @@ namespace ReadHub.Core
 
 		//public async Task<int> AddOrder(OrderServiceModel model)
 		//{
-		//	var curentBooks = new List<Book>();
-
-		//	foreach (var book in model.OrderedBooks)
-		//	{
-		//		var correctBook = await this.context.Books.FindAsync(book.Id);
-
-		//		curentBooks.Add(correctBook);
-		//	}
-
-		//	var order = new Order()
-		//	{
-		//		UserId = model.UserId,
-		//		OrderedBooks = curentBooks
-		//	};
-
-		//	await this.context.Orders.AddAsync(order);
-		//	await this.context.SaveChangesAsync();
-
-		//	return order.Id;
+			
 		//}
 
 		//public async Task<int> AddToCart(BookServiceModel book, string userId)
 		//{
-		//	var list = new List<BookServiceModel>()
-		//	{
-		//		book
-		//	};
-
-		//	if (!IsContainOrder(userId))
-		//	{
-		//		var current = await AddOrder(new OrderServiceModel()
-		//		{
-		//			UserId = userId,
-		//			OrderedBooks = list
-		//		});
-
-		//		return current;
-		//	}
-
-		//	var id = await AddToOrder(book, userId);
-		//	return id;
+			
 		//}
 
 		//private async Task<int> AddToOrder(BookServiceModel book, string userId)
 		//{
-		//	var order = await this.context.Orders
-		//		.Where(o => o.UserId == userId)
-		//		.FirstOrDefaultAsync();
-
-		//	if(order == null)
-		//	{
-		//		return -1;
-		//	}
-
-		//	var bookToAdd = await this.context.Books.FindAsync(book.Id);
-
-		//	order.OrderedBooks.Add(bookToAdd);
-
-		//	await this.context.SaveChangesAsync();
-
-		//	return bookToAdd.Id;
+			
 		//}
 
 		private bool IsContainOrder(string userId)

@@ -1,6 +1,7 @@
 ﻿@using HouseRentingSystem.Infranstructure;
-@using ReadHub.Core.Services.Book.Models;
-@model BookServiceModel
+@using ReadHub.Core.Services.VirtualBook.Models;
+
+@model VirtualBookServiceModel
 
 <div class="col-md-2">
 	<div class="card mb-3">
@@ -10,11 +11,11 @@
 			<br />
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
+					  asp-area="" asp-action="Details" asp-route-id="@Model.BookId" method="get">
 					<input class="btn btn-light" type="submit" value="ℹ️" />
 				</form>
 				<form class="input-group-sm" asp-controller="Book"
-					  asp-area="" asp-action="Remove" asp-route-id="@Model.Id" method="post">
+					  asp-area="" asp-action="Remove" asp-route-id="@Model.BookId" method="post">
 					<input class="btn btn-light" type="submit" value="❌" />
 				</form>
 			</div>
