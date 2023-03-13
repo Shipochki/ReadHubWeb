@@ -17,82 +17,92 @@
 		</div>
 		<div class="card col-8 border-0">
 			<p style="font-size:25px;"><u>@Model.Title</u></p>
-			<p>Author: <b>@Model.AuthorFullName</b></p>
 			<p>
 				Price:
 				<b>@String.Format("{0:f2}", Model.Price) BGN</b>
 			</p>
-			<p>@Model.Description</p>
-			<p>Genre: <b>@Model.Genre</b></p>
 			<p></p>
-			<div class="btn-group" role="group" aria-label="Basic example">
-				@if (Model.OrderId != null)
-				{
+			<div class="card-body">
+				<div class="btn-group" role="group" aria-label="Basic example">
+					@if (Model.OrderId != null)
+					{
+						<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
+							<input class="btn btn-light" type="submit" value="Sold" />
+						</form>
+					}
+					else
+					{
+						<form class="input-group" asp-controller="Cart"
+						  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-success" type="submit" value="Buy" />
+						</form>
+					}
 					<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
-						<input class="btn btn-light" type="submit" value="Sold" />
+						  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-light" type="submit" value="❤️" />
 					</form>
-				}
-				else
-				{
-					<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
-						<input class="btn btn-light" type="submit" value="🛒" />
-					</form>
-				}
-				<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
-					<input class="btn btn-light" type="submit" value="❤️" />
-				</form>
-			</div>
-			<p></p>
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="Edit" asp-route-id="@Model.Id" method="get">
-					<input class="btn btn-light" type="submit" value="✏️" />
-				</form>
-				<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
-					<input class="btn btn-light" type="submit" value="❌" />
-				</form>
+				</div>
 			</div>
 			<p></p>
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
-					<p class="card-text">Publisher: @Model.PublisherName</p>
-					<p class="card-text">Genre: @Model.Genre.ToString()</p>
-					<p class="card-text">TypeBook: @Model.TypeBook.ToString()</p>
-					<p class="card-text">Year: @Model.Year.Year</p>
-					<p class="card-text">Language: @Model.Language</p>
-					<p class="card-text">Nationality: @Model.Nationality</p>
+					<p>Author: <b>@Model.AuthorFullName</b></p>
+					<p class="card-text">Publisher: <b>@Model.PublisherName</b></p>
+					<p class="card-text">Genre: <b>@Model.Genre.ToString()</b></p>
+					<p class="card-text">TypeBook: <b>@Model.TypeBook.ToString()</b></p>
+					<p class="card-text">Published Year: <b>@Model.Year.Year</b></p>
+					<p class="card-text">Language: <b>@Model.Language</b></p>
+					<p class="card-text">Nationality: <b>@Model.Nationality</b></p>
 				</div>
 			</div>
+			<p></p>
+			<div class="card-body">
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="Edit" asp-route-id="@Model.Id" method="get">
+						<input class="btn btn-info" type="submit" value="Edit" />
+					</form>
+					<form class="input-group" asp-controller="Book"
+						  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
+						<input class="btn btn-danger" type="submit" value="Delete" />
+					</form>
+				</div>
+			</div>
+			<p></p>
+			<div class="card" style="width: 36rem;">
+				<div class="card-body">
+					<p><b>Description:</b></p>
+					<p>@Model.Description</p>
+				</div>
+			</div>
+
 			<p></p>
 			<form class="input-group-sm" asp-controller="Review"
 				  asp-area="" asp-action="AddReview" asp-route-id="@Model.Id" method="get">
 				<input class="btn btn-primary" type="submit" value="Add Comment" />
 			</form>
 			<p></p>
-					@if (Model.Reviews.Any())
+			@if (Model.Reviews.Any())
+			{
+				@foreach (var review in Model.Reviews)
+				{
+					for (int i = 0; i < review.RatingNums; i++)
 					{
-						@foreach (var review in Model.Reviews)
-						{
-							for (int i = 0; i < review.RatingNums; i++)
-							{
-								review.Rating += "⭐";
-							}
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<p></p>
-									<p class="card-text">UserName: @review.UserName</p>
-									<p class="card-text">Rating: @review.Rating</p>
-									<p class="card-text">Cooment: @review.Comment</p>
-									<p></p>
-								</div>
-							</div>
-						}
+						review.Rating += "⭐";
 					}
-			
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<p></p>
+							<p class="card-text">UserName: @review.UserName</p>
+							<p class="card-text">Rating: @review.Rating</p>
+							<p class="card-text">Cooment: @review.Comment</p>
+							<p></p>
+						</div>
+					</div>
+				}
+			}
+
 		</div>
 	</div>
 </div>

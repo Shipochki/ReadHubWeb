@@ -11,11 +11,9 @@
 <ul class="navbar-nav">
 	@if (SignInManager.IsSignedIn(User))
 	{
-		<li class="nav-item">
-			<form class="input-group" asp-controller="Cart"
-			  asp-area="" asp-action="MyCart" asp-route-id="@this.User.Id()" method="get">
-				<input class="btn btn-close-white" type="submit" value="🛒" />
-			</form>
+		<li>
+			<a class="dropdown-item nav-link text-dark" asp-area=""
+		   asp-controller="Cart" asp-action="MyCart">🛒</a>
 		</li>
 		<li class="nav-item dropdown">
 			<div>
@@ -34,6 +32,14 @@
 					<li>
 						<a class="dropdown-item nav-link text-dark" asp-area=""
 					   asp-controller="Favorite" asp-action="MyFavorite">❤️ Favorite</a>
+					</li>
+					<li>
+						<a class="dropdown-item nav-link text-dark" asp-area=""
+					   asp-controller="Cart" asp-action="MyCart">🛒 Cart</a>
+					</li>
+					<li>
+						<a class="dropdown-item nav-link text-dark" asp-area=""
+					   asp-controller="Order" asp-action="MyLibrary">📚 My Library</a>
 					</li>
 					<li class="nav-item">
 						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

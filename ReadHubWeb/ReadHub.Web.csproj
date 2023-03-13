@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ReadHub.Core\ReadHub.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Favorite\" />
+  </ItemGroup>
+
 </Project>

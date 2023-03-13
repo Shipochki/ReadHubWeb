@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ReadHub.Core.Services.Admin;
 using ReadHub.Core.Services.Author;
 using ReadHub.Core.Services.Author.Models;
@@ -18,11 +19,14 @@ namespace ReadHub.Web.Controllers
 			this.authorService = _authorService;
 		}
 
+		[Authorize]
+		[HttpGet]
 		public IActionResult AddAuthor()
 		{
 			return View(new AuthorCreateServiceModel());
 		}
 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> AddAuthor(AuthorCreateServiceModel model)
 		{
@@ -31,12 +35,14 @@ namespace ReadHub.Web.Controllers
 			return RedirectToAction("AuthorDetails", "Author", new { authorId });
 		}
 
-
+		[Authorize]
+		[HttpGet]
 		public IActionResult AddPublisher()
 		{
 			return View(new PublisherCreateServiceModel());
 		}
 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> AddPublisher(PublisherCreateServiceModel model)
 		{

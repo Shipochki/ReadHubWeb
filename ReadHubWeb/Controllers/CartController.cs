@@ -25,14 +25,9 @@ namespace ReadHub.Web.Controllers
 
 		[HttpGet]
 		[Authorize]
-		public async Task<IActionResult> MyCart(string id)
+		public async Task<IActionResult> MyCart()
 		{
-			var model = await this.cart.GetCartByUserId(id);
-
-			if (this.User.Id() != id)
-			{
-				return Unauthorized();
-			}
+			var model = await this.cart.GetCartByUserId(this.User.Id());
 
 			return View(model);
 		}

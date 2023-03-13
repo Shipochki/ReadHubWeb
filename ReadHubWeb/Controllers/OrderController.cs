@@ -39,5 +39,14 @@ namespace ReadHub.Web.Controllers
 
 			return View(orders);
 		}
+
+		[Authorize]
+		[HttpGet]
+		public async Task<IActionResult> MyLibrary()
+		{
+			var orders = await this.orders.GetOrdersByUserId(this.User.Id());
+
+			return View(orders);
+		}
 	}
 }

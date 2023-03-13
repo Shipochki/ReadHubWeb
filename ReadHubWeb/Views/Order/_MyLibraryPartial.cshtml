@@ -1,0 +1,11 @@
+﻿@using ReadHub.Core.Services.Order.Models;
+@using ReadHubWeb.Infranstructure;
+
+@model OrderServiceModel
+
+
+@foreach (var book in Model.OrderedBooks)
+{
+	<partial name="_MyBookPartial" model="@book" />
+}
+

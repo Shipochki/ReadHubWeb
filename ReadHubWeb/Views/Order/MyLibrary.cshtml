@@ -3,7 +3,7 @@
 @model OrdersServiceModel
 
 @{
-	ViewBag.Title = "My Orders";
+	ViewBag.Title = "My Library";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -11,7 +11,7 @@
 
 @if (Model == null || !Model.Orders.Any())
 {
-	<h2 class="text-center">You don't have orders</h2>
+		<h2 class="text-center">No Books in your Library!</h2>
 }
 
 <div class="row">
@@ -19,7 +19,7 @@
 	{
 		@foreach (var cart in Model.Orders)
 		{
-			<partial name="_MyOrdersPartial" model="@cart" />
+					<partial name="_MyLibraryPartial" model="@cart" />
 		}
 	}
 </div>
