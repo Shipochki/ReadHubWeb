@@ -19,7 +19,7 @@ else
 {
 	<div class="text-center">
 		<form class="input-group-sm" asp-controller="Order"
-		  asp-area="" asp-action="Remove" asp-route-id="@Model.BooksInCart" method="post">
+		  asp-area="" asp-action="AddOrder" asp-route-id="@Model.Id" method="post">
 			<input class="btn btn-success" type="submit" value="Order" />
 		</form>
 	</div>

@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace HouseRentingSystem.Infranstructure
+namespace ReadHubWeb.Infranstructure
 {
     public static class ClaimsPrincipalExtensions
     {

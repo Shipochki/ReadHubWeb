@@ -1,4 +1,4 @@
-﻿using HouseRentingSystem.Infranstructure;
+﻿using ReadHubWeb.Infranstructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReadHub.Core.Services.Book;

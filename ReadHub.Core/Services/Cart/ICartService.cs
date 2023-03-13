@@ -9,5 +9,9 @@
 		Task AddToCart(int bookId, string userId);
 
 		Task RemoveVirtualBookFromCart(int bookId, string userId);
+
+		Task RemoveAll(CartServiceModel cart, string userId);
+
+		Task<CartServiceModel> GetCartById(int id);
 	}
 }

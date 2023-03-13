@@ -4,8 +4,8 @@
 	using ReadHub.Core.Services.Book;
 	using ReadHub.Core.Data.Entities;
 	using ReadHub.Core.Services.Cart.Models;
+
 	using ReadHub.Core.Services.VirtualBook.Models;
-	using System;
 	using ReadHub.Core.Services.VirtualBook;
 
 	public class CartService : ICartService
@@ -25,7 +25,7 @@
 		{
 			var book = await this.book.GetDetailsBookById(bookId);
 
-			if(!await IsContainCartWithUserId(userId))
+			if (!await IsContainCartWithUserId(userId))
 			{
 				await CreateCartWithUserId(userId);
 			}
@@ -41,7 +41,7 @@
 				Price = book.Price,
 			};
 
-			if(cart == null)
+			if (cart == null)
 			{
 				return;
 			}
@@ -102,7 +102,6 @@
 				.Include(c => c.BooksInCart)
 				.FirstOrDefaultAsync(c => c.UserId == userId);
 
-
 			var virtualBook = cart.BooksInCart.FirstOrDefault(vb => vb.BookId == bookId);
 
 			cart.BooksInCart.Remove(virtualBook);
@@ -110,6 +109,41 @@
 			this.context.VirtualBooks.Remove(virtualBook);
 
 			await this.context.SaveChangesAsync();
+		}
+
+		public async Task RemoveAll(CartServiceModel cart, string userId)
+		{
+			foreach (var book in cart.BooksInCart)
+			{
+				await RemoveVirtualBookFromCart(book.BookId, userId);
+			}
+
+			await this.context.SaveChangesAsync();
+		}
+
+		public async Task<CartServiceModel> GetCartById(int id)
+		{
+			var cart = await this.context
+				.Carts
+				.Where(c => c.Id == id)
+				.Select(c => new CartServiceModel
+				{
+					Id = id,
+					TotalPrice = c.TotalPrice,
+					BooksInCart = c.BooksInCart
+					.Select(b => new VirtualBookServiceModel
+					{
+						Title = b.Title,
+						ImageUrlLink = b.ImageUrlLink,
+						ReaderUrlLInk = b.ReaderUrlLInk,
+						BookId = b.BookId,
+						Price = b.Price,
+					})
+					.ToList()
+				})
+				.FirstOrDefaultAsync();
+
+			return cart;
 		}
 	}
 }
