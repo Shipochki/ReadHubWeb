@@ -18,35 +18,6 @@ namespace ReadHub.Core
 			this.books = _books;
 		}
 
-		//public async Task<int> AddOrder(OrderServiceModel model)
-		//{
-			
-		//}
-
-		//public async Task<int> AddToCart(BookServiceModel book, string userId)
-		//{
-			
-		//}
-
-		//private async Task<int> AddToOrder(BookServiceModel book, string userId)
-		//{
-			
-		//}
-
-		private bool IsContainOrder(string userId)
-		{
-			var order = this.context.Orders
-				.Where(o => o.UserId == userId)
-				.FirstOrDefault();
-
-			if(order == null)
-			{
-				return false;
-			}
-
-			return true;
-		}
-
 		public async Task<OrderServiceModel> GetOrderByUserId(string id)
 		{
 			var newOrder = await this.context.
@@ -68,34 +39,15 @@ namespace ReadHub.Core
 			return order;
 		}
 
-		//public async Task DeleteBookFromOrder(int order,int bookId)
-		//{
-		//	var currentOrder = await this.context.Orders.FindAsync(order);
-
-		//	if(currentOrder== null)
-		//	{
-		//		return;
-		//	}
-
-		//	var book = await this.context.Books.FindAsync(bookId);
-
-		//	if(book==null)
-		//	{
-		//		return;
-		//	}
-
-		//	currentOrder.OrderedBooks.Remove(book);
-
-		//	await this.context.SaveChangesAsync();
-		//}
-
-		public int GetOrderId(string userId)
+		public async Task<int> GetOrderId(string userId)
 		{
-			return this.context
+			var id = await this.context
 				.Orders
 				.Where(o => o.UserId == userId)
-				.FirstOrDefault()
-				.Id;
+				.FirstOrDefaultAsync();
+
+			return id.Id;
 		}
 	}
 }
+

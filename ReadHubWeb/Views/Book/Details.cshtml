@@ -26,10 +26,6 @@
 			<p>Genre: <b>@Model.Genre</b></p>
 			<p></p>
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<form class="input-group" asp-controller="Book"
-					  asp-area="" asp-action="AddReview" asp-route-id="@Model.Id" method="get">
-					<input class="btn btn-light" type="submit" value="⭐" />
-				</form>
 				@if (Model.OrderId != null)
 				{
 					<form class="input-group" asp-controller="Book"
@@ -71,7 +67,12 @@
 					<p class="card-text">Nationality: @Model.Nationality</p>
 				</div>
 			</div>
-
+			<p></p>
+			<form class="input-group-sm" asp-controller="Review"
+				  asp-area="" asp-action="AddReview" asp-route-id="@Model.Id" method="get">
+				<input class="btn btn-primary" type="submit" value="Add Comment" />
+			</form>
+			<p></p>
 					@if (Model.Reviews.Any())
 					{
 						@foreach (var review in Model.Reviews)

@@ -5,5 +5,9 @@
 	public interface ICartService
 	{
 		Task<CartServiceModel> GetCartByUserId(string userId);
+
+		Task AddToCart(int bookId, string userId);
+
+		Task RemoveVirtualBookFromCart(int bookId, string userId);
 	}
 }

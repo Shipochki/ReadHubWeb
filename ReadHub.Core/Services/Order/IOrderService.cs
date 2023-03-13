@@ -5,14 +5,8 @@ namespace ReadHub.Core.Services.Order
 {
 	public interface IOrderService
 	{
-		//Task<int> AddOrder(OrderServiceModel model);
-
 		Task<OrderServiceModel> GetOrderByUserId(string id);
 
-		//Task<int> AddToCart(BookServiceModel book, string userId);
-
-		//Task DeleteBookFromOrder(int order, int bookId);
-
-		int GetOrderId(string userId);
+		Task<int> GetOrderId(string userId);
 	}
 }

@@ -10,6 +10,7 @@ using ReadHub.Core.Services.Cart;
 using ReadHub.Core.Services.Order;
 using ReadHub.Core.Services.Publisher;
 using ReadHub.Core.Services.Review;
+using ReadHub.Core.Services.VirtualBook;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,7 @@ builder.Services.AddTransient<IPublisherService, PublisherService>();
 builder.Services.AddTransient<IReviewService, ReviewService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<IVirtualBookService, VirtualBookService>();
 
 var app = builder.Build();
 

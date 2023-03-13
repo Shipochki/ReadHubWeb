@@ -1,0 +1,38 @@
+﻿@using ReadHub.Core.Services.Cart.Models;
+
+@model CartServiceModel
+
+@{
+	ViewBag.Title = "My Cart";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+
+@if (Model == null || !Model.BooksInCart.Any())
+{
+	<h2 class="text-center">No Books in your cart!</h2>
+}
+else
+{
+	<div class="text-center">
+		<form class="input-group-sm" asp-controller="Order"
+		  asp-area="" asp-action="Remove" asp-route-id="@Model.BooksInCart" method="post">
+			<input class="btn btn-success" type="submit" value="Order" />
+		</form>
+	</div>
+	<p></p>
+	<p class="text-center">Total Price: <b>@Model.TotalPrice</b></p>
+}
+
+<div class="row">
+	@if (Model != null)
+	{
+		@foreach (var cart in Model.BooksInCart)
+		{
+			<partial name="_MyCartPartial" model="@cart" />
+		}
+	}
+</div>

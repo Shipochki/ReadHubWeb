@@ -6,7 +6,7 @@
 	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
 		<form method="post">
 			<div class="form-group">
-				<label asp-for="@Model.Review.BookId">Publisher</label>
+				<label asp-for="@Model.Review.BookId">Title</label>
 				<select asp-for="@Model.Review.BookId" class="form-control">
 					@foreach (var category in Model.Books)
 					{
@@ -15,11 +15,13 @@
 				</select>
 				<span asp-validation-for="@Model.Review.BookId" class="small text-danger"></span>
 			</div>
-			<div class="form-group">
-				<label asp-for="@Model.Review.Raiting" class="form-label">Rating</label>
+			<p></p>
+			<div class="text-center">
+				<label asp-for="@Model.Review.Raiting"  class="form-label">⭐ ⭐	⭐ ⭐ ⭐</label>
 				<input asp-for="@Model.Review.Raiting" type="range" class="form-range" min="1" max="5" id="customRange2">
 				<span asp-validation-for="@Model.Review.Raiting" class="small text-danger"></span>
 			</div>
+			<p></p>
 			<div class="form-group">
 				<label asp-for="@Model.Review.Comment"></label>
 				<textarea asp-for="@Model.Review.Comment" rows="4" class="form-control" placeholder="Comment"></textarea>

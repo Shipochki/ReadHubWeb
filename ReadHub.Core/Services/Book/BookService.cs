@@ -98,7 +98,7 @@ namespace ReadHub.Core
 			await this.context.SaveChangesAsync();
 		}
 
-		public async Task<BookServiceModel> DetailsById(int bookId)
+		public async Task<BookServiceModel> GetDetailsBookById(int bookId)
 		{
 			var book = await this.context.Books.FindAsync(bookId);
 
@@ -118,6 +118,7 @@ namespace ReadHub.Core
 				Description = book.Description,
 				PublisherName = publisherName.Name,
 				ImageUrlLink = book.ImageUrlLink,
+				ReaderUrlLink = book.ReaderUrlLink,
 				AuthorFullName = author.FirstName + " " + author.LastName,
 				Language = book.Language,
 				Nationality = book.Nationality,
@@ -202,5 +203,28 @@ namespace ReadHub.Core
 
 			return books;
         }
-    }
+
+		public async Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id)
+		{
+			return await this.context
+				.Books
+				.Where(b => b.isActive == true && b.Id == id)
+				.Select(b => new BookServiceModel
+				{
+					Id = b.Id,
+					Title = b.Title,
+					Description = b.Description,
+					PublisherName = b.Publisher.Name,
+					ImageUrlLink = b.ImageUrlLink,
+					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
+					Language = b.Language,
+					Nationality = b.Nationality,
+					Price = b.Price,
+					Genre = b.Genre,
+					Year = b.Year,
+					TypeBook = b.TypeBook,
+				})
+				.ToListAsync();
+		}
+	}
 }

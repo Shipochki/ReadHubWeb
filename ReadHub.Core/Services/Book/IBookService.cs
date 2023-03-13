@@ -7,7 +7,9 @@ namespace ReadHub.Core.Services.Book
     {
         Task<IEnumerable<BookServiceModel>> All();
 
-        Task<BookServiceModel> DetailsById(int bookId);
+        Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id);
+
+		Task<BookServiceModel> GetDetailsBookById(int bookId);
 
         Task<BookDetailServiceModel> FindBookById(int bookId);
 

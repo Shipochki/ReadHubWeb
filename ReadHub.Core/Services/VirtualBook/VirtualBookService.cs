@@ -1,4 +1,5 @@
-﻿using ReadHub.Core.Services.VirtualBook.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ReadHub.Core.Services.VirtualBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,22 @@ namespace ReadHub.Core.Services.VirtualBook
 		public VirtualBookService(ReadHubDbContext _context)
 		{
 			this.context = _context;
+		}
+
+		public async Task<VirtualBookServiceModel> GetVirtualBookByBookId(int bookId)
+		{
+			var virtualBook = await this.context
+				.VirtualBooks
+				.FirstOrDefaultAsync(vb => vb.BookId == bookId);
+
+			return new VirtualBookServiceModel()
+			{
+				Title = virtualBook.Title,
+				ImageUrlLink = virtualBook.ImageUrlLink,
+				ReaderUrlLInk = virtualBook.ReaderUrlLInk,
+				Price = virtualBook.Price,
+				BookId = bookId
+			};
 		}
 	}
 }
