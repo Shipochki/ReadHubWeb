@@ -23,6 +23,11 @@
 		{
 			var cart = await this.cart.GetCartById(id);
 
+			if(cart == null)
+			{
+				return BadRequest();
+			}
+
 			await this.orders.AddOrder(cart, this.User.Id());
 
 			await this.cart.RemoveAll(cart, this.User.Id());

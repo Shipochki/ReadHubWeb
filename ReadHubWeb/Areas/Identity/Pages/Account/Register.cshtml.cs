@@ -127,7 +127,7 @@ namespace ReadHub.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await this._signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect("~/Login");
+                    return LocalRedirect("~/Home/Index");
                 }
                 foreach (var error in result.Errors)
                 {

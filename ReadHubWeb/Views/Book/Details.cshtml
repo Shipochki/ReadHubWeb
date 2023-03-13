@@ -25,20 +25,14 @@
 			<p></p>
 			<div class="card-body">
 				<div class="btn-group" role="group" aria-label="Basic example">
-					@if (Model.OrderId != null)
-					{
-						<form class="input-group" asp-controller="Book"
+					<form class="input-group" asp-controller="Book"
 						  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
-							<input class="btn btn-light" type="submit" value="Sold" />
-						</form>
-					}
-					else
-					{
-						<form class="input-group" asp-controller="Cart"
+						<input class="btn btn-light" type="submit" value="Sold" />
+					</form>
+					<form class="input-group" asp-controller="Cart"
 						  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
-							<input class="btn btn-success" type="submit" value="Buy" />
-						</form>
-					}
+						<input class="btn btn-success" type="submit" value="Buy" />
+					</form>
 					<form class="input-group" asp-controller="Favorite"
 						  asp-area="" asp-action="AddFavorite" asp-route-id="@Model.Id" method="post">
 						<input class="btn btn-light" type="submit" value="❤️" />
@@ -62,17 +56,17 @@
 			{
 				<div class="card-body">
 					<div class="btn-group" role="group" aria-label="Basic example">
-					<form class="input-group" asp-controller="Book"
+						<form class="input-group" asp-controller="Book"
 						  asp-area="" asp-action="Edit" asp-route-id="@Model.Id" method="get">
-						<input class="btn btn-info" type="submit" value="Edit" />
-					</form>
-					<form class="input-group" asp-controller="Book"
+							<input class="btn btn-info" type="submit" value="Edit" />
+						</form>
+						<form class="input-group" asp-controller="Book"
 						  asp-area="" asp-action="Delete" asp-route-id="@Model.Id" method="get">
-						<input class="btn btn-danger" type="submit" value="Delete" />
-					</form>
+							<input class="btn btn-danger" type="submit" value="Delete" />
+						</form>
+					</div>
 				</div>
-			</div>
-			<p></p>
+				<p></p>
 			}
 			<div class="card" style="width: 36rem;">
 				<div class="card-body">
@@ -91,6 +85,14 @@
 			{
 				@foreach (var review in Model.Reviews)
 				{
+					@if (this.User.UserName() == review.UserName || this.User.IsAdmin())
+					{
+						<form class="input-group-sm" asp-controller="Review"
+				  asp-area="" asp-action="Remove" asp-route-id="@review.Id" method="get">
+							<input class="btn btn-danger" type="submit" value="Remove" />
+						</form>
+					}
+
 					for (int i = 0; i < review.RatingNums; i++)
 					{
 						review.Rating += "⭐";

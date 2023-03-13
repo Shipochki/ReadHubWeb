@@ -14,5 +14,10 @@
 		{
 			return user.IsInRole(AdminRoleName);
 		}
+
+		public static string UserName(this ClaimsPrincipal user)
+		{
+			return user.FindFirst(ClaimTypes.Email).Value;
+		}
 	}
 }

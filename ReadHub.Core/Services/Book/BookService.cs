@@ -38,7 +38,9 @@
 					Title = b.Title,
 					Description = b.Description,
 					PublisherName = b.Publisher.Name,
+					PublisherId= b.Publisher.Id,
 					ImageUrlLink = b.ImageUrlLink,
+					AuthorId= b.AuthorId,
 					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
 					Language = b.Language,
 					Nationality = b.Nationality,
@@ -78,6 +80,11 @@
 		{
 			var book = await this.context.Books.FindAsync(bookId);
 
+			if (book == null)
+			{
+				return null;
+			}
+
 			book.isActive = false;
 
 			await this.context.SaveChangesAsync();
@@ -87,14 +94,6 @@
 				Title = book.Title,
 				ImageUrlLink = book.ImageUrlLink
 			};
-		}
-
-		public async Task DeleteOrderById(int bookId)
-		{
-			var book = await this.context.Books.FindAsync(bookId);
-
-
-			await this.context.SaveChangesAsync();
 		}
 
 		public async Task<BookServiceModel> GetDetailsBookById(int bookId)
@@ -135,6 +134,11 @@
 		{
 			var book = await this.context.Books.FindAsync(bookId);
 
+			if (book == null)
+			{
+				return;
+			}
+
 			book.Title = model.Title;
 			book.Description = model.Description;
 			book.PublisherId = model.PublisherId;
@@ -156,6 +160,11 @@
 		{
 			var book = await this.context.Books.FindAsync(bookId);
 
+			if (book == null)
+			{
+				return null;
+			}
+
 			var result = new BookDetailServiceModel
 			{
 				Title = book.Title,
@@ -175,35 +184,8 @@
 			return result;
 		}
 
-		public async Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId)
-		{
-			var books = await this.context
-				.Books
-				.Select(b => new BookServiceModel
-				{
-					Id = b.Id,
-					Title = b.Title,
-					Description = b.Description,
-					PublisherName = b.Publisher.Name,
-					PublisherId = b.PublisherId,
-					ImageUrlLink = b.ImageUrlLink,
-					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
-					AuthorId = b.AuthorId,
-					ReaderUrlLink = b.ReaderUrlLink,
-					Language = b.Language,
-					Nationality = b.Nationality,
-					Price = b.Price,
-					Genre = b.Genre,
-					TypeBook = b.TypeBook,
-					Year = b.Year,
-					OrderId = orderId
-				})
-				.ToListAsync();
 
-			return books;
-		}
-
-		public async Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id)
+		public async Task<IEnumerable<BookServiceModel>> GetBooksById(int id)
 		{
 			return await this.context
 				.Books
@@ -225,5 +207,7 @@
 				})
 				.ToListAsync();
 		}
+
+		
 	}
 }

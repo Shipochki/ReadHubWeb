@@ -1,4 +1,6 @@
-﻿namespace ReadHub.Core.Services.User
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ReadHub.Core.Services.User
 {
 	public class UserService : IUserService
 	{
@@ -14,6 +16,22 @@
 			var user = await this.context.Users.FindAsync(userId);
 
 			return user.FirstName;
+		}
+
+		public async Task<string> GetUserIdByPhoneNumber(string phoneNumber)
+		{
+			var user = await this.context
+				.Users
+				.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+
+			return user.Id;
+		}
+
+		public async Task<bool> IsExistUserWithNumber(string phoneNuber)
+		{
+			return await this.context
+				.Users
+				.AnyAsync(u => u.PhoneNumber == phoneNuber);
 		}
 	}
 }

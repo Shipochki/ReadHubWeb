@@ -4,7 +4,7 @@
 
 	public interface IPublisherService
 	{
-		Task<PublisherServiceModel> GetPublisherById(int publisherId);
+		Task<PublisherDetailsModel> GetPublisherById(int publisherId);
 
 		Task<IEnumerable<PublisherServiceModel>> GetAllPublishers();
 	}

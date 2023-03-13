@@ -1,11 +1,23 @@
 ﻿namespace ReadHub.Web.Controllers
 {
 	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Publisher;
+
 	public class PublisherController : Controller
 	{
-		public IActionResult PublisherDetails()
+		private readonly IPublisherService publisher;
+
+		public PublisherController(IPublisherService publisher)
 		{
-			return View();
+			this.publisher = publisher;
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Details(int id)
+		{
+			var publisher = await this.publisher.GetPublisherById(id);
+			
+			return View(publisher);
 		}
 	}
 }

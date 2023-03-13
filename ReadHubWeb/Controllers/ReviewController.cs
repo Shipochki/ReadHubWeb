@@ -26,7 +26,7 @@
 		public async Task<IActionResult> AddReview(int id)
 		{
 			var review = new ReviewFormCreateModel();
-			review.Books = await this.books.GetAllBooksById(id);
+			review.Books = await this.books.GetBooksById(id);
 			return View(review);
 		}
 
