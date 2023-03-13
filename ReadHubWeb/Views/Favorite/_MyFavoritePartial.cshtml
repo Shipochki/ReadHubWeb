@@ -1,0 +1,24 @@
+﻿@using ReadHub.Core.Services.VirtualBook.Models;
+
+@model VirtualBookServiceModel
+
+<div class="col-md-2">
+	<div class="card mb-3">
+		<img class="card-img-top" src="@Model.ImageUrlLink" alt="Book Image">
+		<div class="card-body text-center">
+			<h4>@Model.Title</h4>
+			<br />
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<form class="input-group" asp-controller="Book"
+					  asp-area="" asp-action="Details" asp-route-id="@Model.BookId" method="get">
+					<input class="btn btn-light" type="submit" value="ℹ️" />
+				</form>
+				<form class="input-group-sm" asp-controller="Favorite"
+					  asp-area="" asp-action="Remove" asp-route-id="@Model.BookId" method="post">
+					<input class="btn btn-light" type="submit" value="❌" />
+				</form>
+			</div>
+			<br />
+		</div>
+	</div>
+</div>

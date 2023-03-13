@@ -1,0 +1,27 @@
+﻿@using ReadHub.Core.Services.Favorite.Models;
+
+@model FavoriteServiceModel
+
+@{
+	ViewBag.Title = "My Favorite";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+
+@if (Model == null || !Model.FavoriteBooks.Any())
+{
+	<h2 class="text-center">No Favorite books!</h2>
+}
+
+<div class="row">
+	@if (Model != null)
+	{
+		@foreach (var favorite in Model.FavoriteBooks)
+		{
+			<partial name="_MyFavoritePartial" model="@favorite" />
+		}
+	}
+</div>

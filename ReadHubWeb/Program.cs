@@ -7,6 +7,7 @@ using ReadHub.Core.Services.Admin;
 using ReadHub.Core.Services.Author;
 using ReadHub.Core.Services.Book;
 using ReadHub.Core.Services.Cart;
+using ReadHub.Core.Services.Favorite;
 using ReadHub.Core.Services.Order;
 using ReadHub.Core.Services.Publisher;
 using ReadHub.Core.Services.Review;
@@ -46,6 +47,7 @@ builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<ICartService, CartService>();
 builder.Services.AddTransient<IVirtualBookService, VirtualBookService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IFavoriteService, FavoriteService>();
 
 var app = builder.Build();
 

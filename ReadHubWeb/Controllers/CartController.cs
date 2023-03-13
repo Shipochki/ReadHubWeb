@@ -36,7 +36,7 @@ namespace ReadHub.Web.Controllers
 		[Authorize]
 		public async Task<IActionResult> Remove(int id)
 		{
-			await this.cart.RemoveVirtualBookFromCart(id, this.User.Id());
+			await this.cart.RemoveFromCart(id, this.User.Id());
 
 			return RedirectToAction("Details", "Book", new { id });
 		}

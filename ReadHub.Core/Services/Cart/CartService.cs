@@ -12,13 +12,11 @@
 	{
 		private readonly ReadHubDbContext context;
 		private readonly IBookService book;
-		private readonly IVirtualBookService virtualBook;
 
-		public CartService(ReadHubDbContext _context, IBookService _book, IVirtualBookService _virtualBook)
+		public CartService(ReadHubDbContext _context, IBookService _book)
 		{
 			this.context = _context;
 			this.book = _book;
-			this.virtualBook = _virtualBook;
 		}
 
 		public async Task AddToCart(int bookId, string userId)
@@ -95,7 +93,7 @@
 			return cart;
 		}
 
-		public async Task RemoveVirtualBookFromCart(int bookId, string userId)
+		public async Task RemoveFromCart(int bookId, string userId)
 		{
 			var cart = await this.context
 				.Carts
@@ -115,7 +113,7 @@
 		{
 			foreach (var book in cart.BooksInCart)
 			{
-				await RemoveVirtualBookFromCart(book.BookId, userId);
+				await RemoveFromCart(book.BookId, userId);
 			}
 
 			await this.context.SaveChangesAsync();
