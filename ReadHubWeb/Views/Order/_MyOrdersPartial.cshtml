@@ -1,0 +1,18 @@
+﻿@using ReadHub.Core.Services.Order.Models;
+@using ReadHubWeb.Infranstructure;
+
+@model OrderServiceModel
+
+<div class="col-md-2">
+	<div class="card mb-3">
+		@foreach (var book in Model.OrderedBooks)
+		{
+			<img class="card-img-top" src="@book.ImageUrlLink" alt="Book Image">
+			<p>@book.Title</p>
+			<p></p>
+		}
+		<div class="card-body text-center">
+			<p>Price: <b>@Model.TotalPrice</b> BGN</p>
+		</div>
+	</div>
+</div>

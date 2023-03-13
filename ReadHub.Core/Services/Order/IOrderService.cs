@@ -5,7 +5,7 @@ namespace ReadHub.Core.Services.Order
 {
 	public interface IOrderService
 	{
-		Task<OrderServiceModel> GetOrderByUserId(string id);
+		Task<OrdersServiceModel> GetOrdersByUserId(string id);
 
 		Task<int> GetOrderId(string userId);
 

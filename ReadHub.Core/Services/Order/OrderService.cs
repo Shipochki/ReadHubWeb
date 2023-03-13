@@ -12,12 +12,10 @@ namespace ReadHub.Core
 	public class OrderService : IOrderService
 	{
 		private readonly ReadHubDbContext context;
-		private readonly IBookService books;
 
-		public OrderService(ReadHubDbContext _context, IBookService _books)
+		public OrderService(ReadHubDbContext _context)
 		{
 			this.context = _context;
-			this.books = _books;
 		}
 
 		public async Task AddOrder(CartServiceModel cart, string userId)
@@ -51,25 +49,32 @@ namespace ReadHub.Core
 			await this.context.SaveChangesAsync();
 		}
 
-		public async Task<OrderServiceModel> GetOrderByUserId(string id)
+		public async Task<OrdersServiceModel> GetOrdersByUserId(string userId)
 		{
-			var newOrder = await this.context.
-				Orders
-				.Where(o => o.UserId == id)
-				.FirstOrDefaultAsync();
+			var orders = await this.context
+				.Orders
+				.Where(o => o.UserId == userId)
+				.Select(o => new OrderServiceModel
+				{
+					Id = o.Id,
+					TotalPrice = o.TotalPrice,
+					OrderedBooks = o.OrderedBooks
+					.Select(ob => new VirtualBookServiceModel
+					{
+						Title = ob.Title,
+						ImageUrlLink = ob.ImageUrlLink,
+						ReaderUrlLInk = ob.ReaderUrlLInk,
+						BookId = ob.BookId,
+						Price = ob.Price,
+					})
+					.ToList()
+				})
+				.ToListAsync();
 
-			if (newOrder == null)
+			return new OrdersServiceModel()
 			{
-				return null;
-			}
-
-			var order = new OrderServiceModel()
-			{
-				UserId = newOrder.UserId,
-				OrderedBooks = await this.books.GetAllBooksByOrderId(newOrder.Id)
+				Orders = orders
 			};
-
-			return order;
 		}
 
 		public async Task<int> GetOrderId(string userId)

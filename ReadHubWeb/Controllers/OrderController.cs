@@ -31,9 +31,13 @@ namespace ReadHub.Web.Controllers
 			return RedirectToAction("MyCart", "Cart", this.User.Id());
 		}
 
-		public async Task<IActionResult> MyOrders(string userId)
+		[Authorize]
+		[HttpGet]
+		public async Task<IActionResult> MyOrders()
 		{
-			return View();
+			var orders = await this.orders.GetOrdersByUserId(this.User.Id());
+
+			return View(orders);
 		}
 	}
 }

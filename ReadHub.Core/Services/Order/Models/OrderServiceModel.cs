@@ -1,11 +1,14 @@
 ﻿using ReadHub.Core.Services.Book.Models;
+using ReadHub.Core.Services.VirtualBook.Models;
 
 namespace ReadHub.Core.Services.Order.Models
 {
 	public class OrderServiceModel
 	{
-		public string UserId { get; set; } = null!;
+		public int Id { get; set; }
 
-		public IEnumerable<BookServiceModel> OrderedBooks { get; set; } = new List<BookServiceModel>();
+		public decimal TotalPrice { get; set; }
+
+		public IEnumerable<VirtualBookServiceModel> OrderedBooks { get; set; } = new List<VirtualBookServiceModel>();
 	}
 }

@@ -1,10 +1,12 @@
-﻿@using ReadHubWeb.Infranstructure;
+﻿@using ReadHub.Core.Services.User;
+@using ReadHubWeb.Infranstructure;
 @using Microsoft.AspNetCore.Identity
 @using ReadHub.Core.Data;
 @using ReadHub.Core.Services.Order.Models;
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject IUserService user
 
 <ul class="navbar-nav">
 	@if (SignInManager.IsSignedIn(User))
@@ -15,13 +17,31 @@
 				<input class="btn btn-close-white" type="submit" value="🛒" />
 			</form>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-		</li>
-		<li class="nav-item">
-			<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-				<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-			</form>
+		<li class="nav-item dropdown">
+			<div>
+				<a class="btn dropdown-toggle" href="#" role="button"
+			   id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+					Hello @await user.GetFistName(this.User.Id())! 👨
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<li>
+						<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">💼 Manage</a>
+					</li>
+					<li>
+						<a class="dropdown-item nav-link text-dark" asp-area=""
+					   asp-controller="Order" asp-action="MyOrders">📦 Orders</a>
+					</li>
+					<li>
+						<a class="dropdown-item nav-link text-dark" asp-area=""
+					   asp-controller="Favorite" asp-action="MyFavorite">❤️ Favorite</a>
+					</li>
+					<li class="nav-item">
+						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+							<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+						</form>
+					</li>
+				</ul>
+			</div>
 		</li>
 	}
 	else

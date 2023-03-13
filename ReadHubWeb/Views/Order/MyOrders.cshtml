@@ -1,0 +1,25 @@
+﻿@using ReadHub.Core.Services.Order.Models;
+
+@model OrdersServiceModel
+
+@{
+	ViewBag.Title = "My Orders";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (Model == null || !Model.Orders.Any())
+{
+	<h2 class="text-center">No Orders in your cart!</h2>
+}
+
+<div class="row">
+	@if (Model != null)
+	{
+		@foreach (var cart in Model.Orders)
+		{
+			<partial name="_MyOrdersPartial" model="@cart" />
+		}
+	}
+</div>
