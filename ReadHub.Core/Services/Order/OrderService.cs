@@ -1,14 +1,13 @@
-﻿using ReadHub.Core.Data.Entities;
-using ReadHub.Core.Services.Order;
-using ReadHub.Core.Services.Book.Models;
-using ReadHub.Core.Services.Book;
-using ReadHub.Core.Services.Order.Models;
-using Microsoft.EntityFrameworkCore;
-using ReadHub.Core.Services.VirtualBook.Models;
-using ReadHub.Core.Services.Cart.Models;
-
-namespace ReadHub.Core
+﻿namespace ReadHub.Core
 {
+	using Microsoft.EntityFrameworkCore;
+
+	using ReadHub.Core.Data.Entities;
+	using ReadHub.Core.Services.Order;
+	using ReadHub.Core.Services.Order.Models;
+	using ReadHub.Core.Services.VirtualBook.Models;
+	using ReadHub.Core.Services.Cart.Models;
+
 	public class OrderService : IOrderService
 	{
 		private readonly ReadHubDbContext context;

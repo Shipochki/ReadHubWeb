@@ -1,47 +1,41 @@
-﻿using ReadHub.Core.Data.Enum;
-using ReadHub.Core.Services.Review.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.Book.Models
+﻿namespace ReadHub.Core.Services.Book.Models
 {
-    public class BookServiceModel
-    {
-        public int Id { get; set; }
-        public string Title { get; set; } = null!;
+	using ReadHub.Core.Data.Enum;
+	using ReadHub.Core.Services.Review.Models;
 
-        public string Description { get; set; } = null!;
+	public class BookServiceModel
+	{
+		public int Id { get; set; }
+		public string Title { get; set; } = null!;
 
-        public string PublisherName { get; set; } = null!;
+		public string Description { get; set; } = null!;
 
-        public int PublisherId { get; set; }
+		public string PublisherName { get; set; } = null!;
 
-        public string ImageUrlLink { get; set; } = null!;
+		public int PublisherId { get; set; }
 
-        public string ReaderUrlLink { get; set; } = null!;
+		public string ImageUrlLink { get; set; } = null!;
 
-        public string AuthorFullName { get; set; } = null!;
+		public string ReaderUrlLink { get; set; } = null!;
 
-        public int AuthorId { get; set; }
+		public string AuthorFullName { get; set; } = null!;
 
-        public Genre Genre { get; set; }
+		public int AuthorId { get; set; }
 
-        public DateTime Year { get; set; }
+		public Genre Genre { get; set; }
 
-        public string Language { get; set; } = null!;
+		public DateTime Year { get; set; }
 
-        public string Nationality { get; set; } = null!;
+		public string Language { get; set; } = null!;
 
-        public TypeBook TypeBook { get; set; }
+		public string Nationality { get; set; } = null!;
 
-        public decimal Price { get; set; }
+		public TypeBook TypeBook { get; set; }
 
-        public int? OrderId { get; set; }
+		public decimal Price { get; set; }
 
-        public IEnumerable<ReviewDetailsServiceModel> Reviews { get; set; } = new List<ReviewDetailsServiceModel>();
-    }
+		public int? OrderId { get; set; }
+
+		public IEnumerable<ReviewDetailsServiceModel> Reviews { get; set; } = new List<ReviewDetailsServiceModel>();
+	}
 }

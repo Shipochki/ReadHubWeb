@@ -1,12 +1,11 @@
-﻿using ReadHubWeb.Infranstructure;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Services.Cart;
-using ReadHub.Core.Services.Cart.Models;
-using ReadHub.Core.Services.Order;
-using Microsoft.AspNetCore.Authorization;
-
-namespace ReadHub.Web.Controllers
+﻿namespace ReadHub.Web.Controllers
 {
+	using ReadHubWeb.Infranstructure;
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Cart;
+	using ReadHub.Core.Services.Order;
+	using Microsoft.AspNetCore.Authorization;
+
 	public class OrderController : Controller
 	{
 		private readonly IOrderService orders;

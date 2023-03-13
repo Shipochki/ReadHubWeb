@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static ReadHub.Core.DataConstants.Review;
-
-namespace ReadHub.Core.Services.Review.Models
+﻿namespace ReadHub.Core.Services.Review.Models
 {
+	using System.ComponentModel.DataAnnotations;
+	using static ReadHub.Core.DataConstants.Review;
+
 	public class ReviewCreateServiceModel
 	{
 		[Required]

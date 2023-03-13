@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Data.Entities;
-using ReadHub.Core.Services.Admin;
-using ReadHub.Core.Services.Author.Models;
-using ReadHub.Core.Services.Publisher.Models;
-
-namespace ReadHub.Core
+﻿namespace ReadHub.Core
 {
+	using ReadHub.Core.Data.Entities;
+	using ReadHub.Core.Services.Admin;
+	using ReadHub.Core.Services.Author.Models;
+	using ReadHub.Core.Services.Publisher.Models;
+
 	public class AdminService : IAdminService
 	{
 		private readonly ReadHubDbContext context;

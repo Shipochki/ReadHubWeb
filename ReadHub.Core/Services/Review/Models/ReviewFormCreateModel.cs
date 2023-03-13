@@ -1,12 +1,7 @@
-﻿using ReadHub.Core.Services.Book.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.Review.Models
+﻿namespace ReadHub.Core.Services.Review.Models
 {
+	using ReadHub.Core.Services.Book.Models;
+
 	public class ReviewFormCreateModel
 	{
 		public IEnumerable<BookServiceModel> Books { get; set; } = new List<BookServiceModel>();

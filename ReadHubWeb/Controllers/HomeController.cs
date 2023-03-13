@@ -1,21 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ReadHubWeb.Models;
-using System.Diagnostics;
-
-namespace ReadHubWeb.Controllers
+﻿namespace ReadHubWeb.Controllers
 {
-    public class HomeController : Controller
-    {
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHubWeb.Models;
+	using System.Diagnostics;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		public IActionResult Index()
+		{
+			return View();
+		}
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }

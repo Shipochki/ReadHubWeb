@@ -1,12 +1,7 @@
-﻿using ReadHub.Core.Services.Publisher.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.Publisher
+﻿namespace ReadHub.Core.Services.Publisher
 {
+	using ReadHub.Core.Services.Publisher.Models;
+
 	public interface IPublisherService
 	{
 		Task<PublisherServiceModel> GetPublisherById(int publisherId);

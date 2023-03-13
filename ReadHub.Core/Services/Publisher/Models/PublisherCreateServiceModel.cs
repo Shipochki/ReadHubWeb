@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static ReadHub.Core.DataConstants.Publisher;
-
-namespace ReadHub.Core.Services.Publisher.Models
+﻿namespace ReadHub.Core.Services.Publisher.Models
 {
+	using System.ComponentModel.DataAnnotations;
+	using static ReadHub.Core.DataConstants.Publisher;
+
 	public class PublisherCreateServiceModel
 	{
 		[Required]

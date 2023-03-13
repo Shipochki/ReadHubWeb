@@ -1,12 +1,12 @@
-﻿using ReadHubWeb.Infranstructure;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Services.Book;
-using ReadHub.Core.Services.Review;
-using ReadHub.Core.Services.Review.Models;
-
-namespace ReadHub.Web.Controllers
+﻿namespace ReadHub.Web.Controllers
 {
+	using ReadHubWeb.Infranstructure;
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Book;
+	using ReadHub.Core.Services.Review;
+	using ReadHub.Core.Services.Review.Models;
+
 	[Authorize]
 	public class ReviewController : Controller
 	{
@@ -14,7 +14,7 @@ namespace ReadHub.Web.Controllers
 		private readonly IReviewService review;
 
 		public ReviewController(
-			IBookService _books, 
+			IBookService _books,
 			IReviewService _review)
 		{
 			this.books = _books;

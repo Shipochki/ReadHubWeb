@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static ReadHub.Core.DataConstants.Author;
-
-namespace ReadHub.Core.Services.Author.Models
+﻿namespace ReadHub.Core.Services.Author.Models
 {
+	using System.ComponentModel.DataAnnotations;
+	using static ReadHub.Core.DataConstants.Author;
+
 	public class AuthorCreateServiceModel
 	{
 		[Required]

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReadHub.Core.Services.VirtualBook.Models;
-
-namespace ReadHub.Core.Services.Cart.Models
+﻿namespace ReadHub.Core.Services.Cart.Models
 {
+	using ReadHub.Core.Services.VirtualBook.Models;
+
 	public class CartServiceModel
 	{
 		public int Id { get; set; }

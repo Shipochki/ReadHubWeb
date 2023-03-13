@@ -13,6 +13,7 @@ using ReadHub.Core.Services.Publisher;
 using ReadHub.Core.Services.Review;
 using ReadHub.Core.Services.User;
 using ReadHub.Core.Services.VirtualBook;
+using ReadHub.Web.Infrastucture;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,5 +94,7 @@ app.UseEndpoints(endpoints =>
 });
 
 app.MapRazorPages();
+
+await app.SeedAdmin();
 
 app.Run();

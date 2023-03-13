@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ReadHub.Core.Data.Entities;
-using ReadHub.Core.Data.Enum;
-using ReadHub.Core.Services.Author;
-using ReadHub.Core.Services.Book;
-using ReadHub.Core.Services.Book.Models;
-using ReadHub.Core.Services.Publisher;
-using ReadHub.Core.Services.Review;
-
-namespace ReadHub.Core
+﻿namespace ReadHub.Core
 {
+	using Microsoft.EntityFrameworkCore;
+	using ReadHub.Core.Data.Entities;
+	using ReadHub.Core.Services.Author;
+	using ReadHub.Core.Services.Book;
+	using ReadHub.Core.Services.Book.Models;
+	using ReadHub.Core.Services.Publisher;
+	using ReadHub.Core.Services.Review;
+
 	public class BookService : IBookService
 	{
 		private readonly ReadHubDbContext context;
@@ -17,8 +16,8 @@ namespace ReadHub.Core
 		private readonly IReviewService review;
 
 		public BookService(
-			ReadHubDbContext _context, 
-			IAuthorService _author, 
+			ReadHubDbContext _context,
+			IAuthorService _author,
 			IPublisherService _publisher,
 			IReviewService _review)
 		{
@@ -176,8 +175,8 @@ namespace ReadHub.Core
 			return result;
 		}
 
-        public async Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId)
-        {
+		public async Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId)
+		{
 			var books = await this.context
 				.Books
 				.Select(b => new BookServiceModel
@@ -189,20 +188,20 @@ namespace ReadHub.Core
 					PublisherId = b.PublisherId,
 					ImageUrlLink = b.ImageUrlLink,
 					AuthorFullName = b.Author.FirstName + " " + b.Author.LastName,
-					AuthorId= b.AuthorId,
-					ReaderUrlLink= b.ReaderUrlLink,
+					AuthorId = b.AuthorId,
+					ReaderUrlLink = b.ReaderUrlLink,
 					Language = b.Language,
 					Nationality = b.Nationality,
 					Price = b.Price,
 					Genre = b.Genre,
 					TypeBook = b.TypeBook,
 					Year = b.Year,
-					OrderId= orderId
+					OrderId = orderId
 				})
 				.ToListAsync();
 
 			return books;
-        }
+		}
 
 		public async Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id)
 		{

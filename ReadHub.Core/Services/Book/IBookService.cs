@@ -1,27 +1,26 @@
-﻿using ReadHub.Core.Data.Entities;
-using ReadHub.Core.Services.Book.Models;
-
-namespace ReadHub.Core.Services.Book
+﻿namespace ReadHub.Core.Services.Book
 {
-    public interface IBookService
-    {
-        Task<IEnumerable<BookServiceModel>> All();
+	using ReadHub.Core.Services.Book.Models;
 
-        Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id);
+	public interface IBookService
+	{
+		Task<IEnumerable<BookServiceModel>> All();
+
+		Task<IEnumerable<BookServiceModel>> GetAllBooksById(int id);
 
 		Task<BookServiceModel> GetDetailsBookById(int bookId);
 
-        Task<BookDetailServiceModel> FindBookById(int bookId);
+		Task<BookDetailServiceModel> FindBookById(int bookId);
 
-        Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId);
+		Task<IEnumerable<BookServiceModel>> GetAllBooksByOrderId(int orderId);
 
-        Task<int> Create(BookCreateServiceModel model);
+		Task<int> Create(BookCreateServiceModel model);
 
-        Task<BookDeleteView> Delete(int bookId);
+		Task<BookDeleteView> Delete(int bookId);
 
-        Task Edit(int bookId, BookCreateServiceModel model);
+		Task Edit(int bookId, BookCreateServiceModel model);
 
-        Task DeleteOrderById(int bookId);
+		Task DeleteOrderById(int bookId);
 
 	}
 }

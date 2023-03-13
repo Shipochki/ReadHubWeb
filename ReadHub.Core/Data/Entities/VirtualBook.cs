@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ReadHub.Core.Data.Entities
+﻿namespace ReadHub.Core.Data.Entities
 {
+	using System.ComponentModel.DataAnnotations;
+
 	public class VirtualBook
 	{
 		[Key]

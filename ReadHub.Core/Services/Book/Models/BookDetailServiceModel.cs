@@ -1,15 +1,9 @@
-﻿using ReadHub.Core.Data.Enum;
-using ReadHub.Core.Services.Author.Models;
-using ReadHub.Core.Services.Publisher.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.Book.Models
+﻿namespace ReadHub.Core.Services.Book.Models
 {
+	using ReadHub.Core.Data.Enum;
+	using ReadHub.Core.Services.Author.Models;
+	using ReadHub.Core.Services.Publisher.Models;
+
 	public class BookDetailServiceModel
 	{
 		public string Title { get; set; } = null!;

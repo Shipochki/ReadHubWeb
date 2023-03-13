@@ -1,10 +1,10 @@
-﻿using ReadHubWeb.Infranstructure;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Services.Cart;
-
-namespace ReadHub.Web.Controllers
+﻿namespace ReadHub.Web.Controllers
 {
+	using ReadHubWeb.Infranstructure;
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Cart;
+
 	public class CartController : Controller
 	{
 		private readonly ICartService cart;

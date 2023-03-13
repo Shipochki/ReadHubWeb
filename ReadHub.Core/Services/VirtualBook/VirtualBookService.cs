@@ -1,13 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ReadHub.Core.Services.VirtualBook.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.VirtualBook
+﻿namespace ReadHub.Core.Services.VirtualBook
 {
+	using Microsoft.EntityFrameworkCore;
+	using ReadHub.Core.Services.VirtualBook.Models;
+
 	public class VirtualBookService : IVirtualBookService
 	{
 		private readonly ReadHubDbContext context;

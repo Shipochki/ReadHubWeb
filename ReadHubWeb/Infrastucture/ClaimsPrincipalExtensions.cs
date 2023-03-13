@@ -1,12 +1,18 @@
-﻿using System.Security.Claims;
-
-namespace ReadHubWeb.Infranstructure
+﻿namespace ReadHubWeb.Infranstructure
 {
-    public static class ClaimsPrincipalExtensions
-    {
-        public static string Id(this ClaimsPrincipal user)
-        {
-            return user.FindFirst(ClaimTypes.NameIdentifier).Value;
-        }
-    }
+	using static ReadHub.Web.Areas.Admin.AdminConstants;
+	using System.Security.Claims;
+
+	public static class ClaimsPrincipalExtensions
+	{
+		public static string Id(this ClaimsPrincipal user)
+		{
+			return user.FindFirst(ClaimTypes.NameIdentifier).Value;
+		}
+
+		public static bool IsAdmin(this ClaimsPrincipal user)
+		{
+			return user.IsInRole(AdminRoleName);
+		}
+	}
 }

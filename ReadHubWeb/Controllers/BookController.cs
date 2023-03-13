@@ -6,6 +6,7 @@
 	using ReadHub.Core.Services.Author;
 	using ReadHub.Core.Services.Publisher;
 	using Microsoft.AspNetCore.Authorization;
+	using ReadHubWeb.Infranstructure;
 
 	public class BookController : Controller
 	{
@@ -51,6 +52,11 @@
 		[Authorize]
 		public async Task<IActionResult> Edit(int id)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var book = await books.FindBookById(id);
 			book.Authors = await this.author.GetAllAuthors();
 			book.Publishers = await this.publisher.GetAllPublishers();
@@ -77,6 +83,11 @@
 		[Authorize]
 		public async Task<IActionResult> Edit(int id, BookCreateServiceModel model)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			await this.books.Edit(id, model);
 
 			return RedirectToAction(nameof(All));
@@ -86,6 +97,11 @@
 		[Authorize]
 		public async Task<IActionResult> Delete(int id)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var book = await this.books.FindBookById(id);
 
 			return View(new BookDeleteView()
@@ -100,6 +116,11 @@
 		[Authorize]
 		public async Task<IActionResult> Delete(BookDeleteView model)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var book = await this.books.Delete(model.Id);
 
 			return RedirectToAction(nameof(All));
@@ -109,6 +130,11 @@
 		[Authorize]
 		public async Task<IActionResult> Add()
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			return View(new BookCreateServiceModel()
 			{
 				Authors = await this.author.GetAllAuthors(),
@@ -120,6 +146,11 @@
 		[Authorize]
 		public async Task<IActionResult> Add(BookCreateServiceModel model)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var bookId = await this.books.Create(model);
 
 			return RedirectToAction(nameof(Details), new { bookId });

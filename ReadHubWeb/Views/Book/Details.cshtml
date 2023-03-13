@@ -1,5 +1,6 @@
 ﻿@using ReadHub.Core.Services.Book.Models;
 @using ReadHub.Core.Services.Book;
+@using ReadHubWeb.Infranstructure;
 @model BookServiceModel
 @inject IBookService books
 
@@ -57,8 +58,10 @@
 				</div>
 			</div>
 			<p></p>
-			<div class="card-body">
-				<div class="btn-group" role="group" aria-label="Basic example">
+			@if (this.User.IsAdmin())
+			{
+				<div class="card-body">
+					<div class="btn-group" role="group" aria-label="Basic example">
 					<form class="input-group" asp-controller="Book"
 						  asp-area="" asp-action="Edit" asp-route-id="@Model.Id" method="get">
 						<input class="btn btn-info" type="submit" value="Edit" />
@@ -70,6 +73,7 @@
 				</div>
 			</div>
 			<p></p>
+			}
 			<div class="card" style="width: 36rem;">
 				<div class="card-body">
 					<p><b>Description:</b></p>

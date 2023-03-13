@@ -1,20 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ReadHub.Core.Services.Publisher.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReadHub.Core.Services.Publisher
+﻿namespace ReadHub.Core.Services.Publisher
 {
+	using Microsoft.EntityFrameworkCore;
+	using ReadHub.Core.Services.Publisher.Models;
+
 	public class PublisherService : IPublisherService
 	{
 		private readonly ReadHubDbContext context;
 
 		public PublisherService(ReadHubDbContext _context)
 		{
-			this.context= _context;
+			this.context = _context;
 		}
 
 		public async Task<IEnumerable<PublisherServiceModel>> GetAllPublishers()
@@ -25,8 +20,8 @@ namespace ReadHub.Core.Services.Publisher
 				{
 					Id = p.Id,
 					Name = p.Name,
-					Description= p.Description,
-					Year= p.Year,
+					Description = p.Description,
+					Year = p.Year,
 				})
 				.ToListAsync();
 		}

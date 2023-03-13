@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Services.Favorite;
-using ReadHubWeb.Infranstructure;
-
-namespace ReadHub.Web.Controllers
+﻿namespace ReadHub.Web.Controllers
 {
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Favorite;
+	using ReadHubWeb.Infranstructure;
+
 	public class FavoriteController : Controller
 	{
 		private readonly IFavoriteService favorite;

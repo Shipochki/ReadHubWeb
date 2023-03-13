@@ -1,5 +1,4 @@
-﻿
-namespace ReadHub.Core.Services.Author.Models
+﻿namespace ReadHub.Core.Services.Author.Models
 {
     public class AuthorServiceModel
     {

@@ -1,28 +1,30 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ReadHub.Core.Services.Admin;
-using ReadHub.Core.Services.Author;
-using ReadHub.Core.Services.Author.Models;
-using ReadHub.Core.Services.Publisher;
-using ReadHub.Core.Services.Publisher.Models;
-
-namespace ReadHub.Web.Controllers
+﻿namespace ReadHub.Web.Controllers
 {
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
+	using ReadHub.Core.Services.Admin;
+	using ReadHub.Core.Services.Author.Models;
+	using ReadHub.Core.Services.Publisher.Models;
+	using ReadHubWeb.Infranstructure;
+
 	public class AdminController : Controller
 	{
 		private readonly IAdminService adminService;
-		private readonly IAuthorService authorService;
 
-		public AdminController(IAdminService _adminService, IAuthorService _authorService)
+		public AdminController(IAdminService _adminService)
 		{
 			this.adminService = _adminService;
-			this.authorService = _authorService;
 		}
 
 		[Authorize]
 		[HttpGet]
 		public IActionResult AddAuthor()
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			return View(new AuthorCreateServiceModel());
 		}
 
@@ -30,6 +32,11 @@ namespace ReadHub.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddAuthor(AuthorCreateServiceModel model)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var authorId = await this.adminService.CreateAuthor(model);
 
 			return RedirectToAction("AuthorDetails", "Author", new { authorId });
@@ -39,6 +46,11 @@ namespace ReadHub.Web.Controllers
 		[HttpGet]
 		public IActionResult AddPublisher()
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			return View(new PublisherCreateServiceModel());
 		}
 
@@ -46,9 +58,14 @@ namespace ReadHub.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddPublisher(PublisherCreateServiceModel model)
 		{
+			if (!this.User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
 			var publisherId = await this.adminService.CreatePublisher(model);
 
-			return RedirectToAction("PublisherDetails", "Publisher" ,new { publisherId });
+			return RedirectToAction("PublisherDetails", "Publisher", new { publisherId });
 		}
 
 	}
