@@ -20,7 +20,9 @@
 		{
 			await this.favorite.AddToFavorite(id, this.User.Id());
 
-			return RedirectToAction("Details", "Book", new { id });
+            TempData["message"] = "You have sucssessfuly added a book to favorite!";
+
+            return RedirectToAction("Details", "Book", new { id });
 		}
 
 		[Authorize]

@@ -23,4 +23,20 @@
     <ProjectReference Include="..\ReadHub.Core\ReadHub.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Author\" />
+    <Folder Include="Areas\Admin\Views\Publisher\" />
+  </ItemGroup>
+
 </Project>

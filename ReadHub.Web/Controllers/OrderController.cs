@@ -32,7 +32,9 @@
 
 			await this.cart.RemoveAll(cart, this.User.Id());
 
-			return RedirectToAction("MyCart", "Cart", this.User.Id());
+            TempData["message"] = "You have sucssessfuly added a order!";
+
+            return RedirectToAction("MyCart", "Cart", this.User.Id());
 		}
 
 		[Authorize]

@@ -20,7 +20,9 @@
 		{
 			await this.cart.AddToCart(id, this.User.Id());
 
-			return RedirectToAction("Details", "Book", new { id });
+            TempData["message"] = "You have sucssessfuly added a book to Cart!";
+
+            return RedirectToAction("Details", "Book", new { id });
 		}
 
 		[HttpGet]

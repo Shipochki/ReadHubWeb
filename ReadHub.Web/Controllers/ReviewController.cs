@@ -36,7 +36,9 @@
 		{
 			var bookId = await this.review.CreateReview(model, this.User.Id());
 
-			return RedirectToAction("Details", "Book", new { bookId });
+            TempData["message"] = "You have sucssessfuly added a review!";
+
+            return RedirectToAction("Details", "Book", new { bookId });
 		}
 	}
 }
