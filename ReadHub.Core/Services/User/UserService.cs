@@ -11,6 +11,16 @@ namespace ReadHub.Core.Services.User
 			this.context = _context;
 		}
 
+		public bool CorrectUserName(string userName, string reviewUserName)
+		{
+			if(userName == reviewUserName)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public async Task<string> GetFistName(string userId)
 		{
 			var user = await this.context.Users.FindAsync(userId);

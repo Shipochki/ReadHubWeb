@@ -2,7 +2,7 @@
 {
 	using Microsoft.EntityFrameworkCore;
 	using ReadHub.Core.Services.Author.Models;
-
+	using ReadHub.Core.Services.Book.Models;
 
 	public class AuthorService : IAuthorService
 	{
@@ -26,15 +26,39 @@
 				.ToListAsync();
 		}
 
-		public async Task<AuthorServiceModel> GetAuthorById(int authorId)
+		public async Task<AuthorDetailsModel> GetAuthorById(int authorId)
 		{
-			var author = await this.context.Authors.FindAsync(authorId);
+			var author = await this.context
+				.Authors
+				.Where(a => a.Id == authorId)
+				.Select(a => new AuthorDetailsModel
+				{
+					FirstName = a.FirstName,
+					LastName = a.LastName,
+					Books = a.PublishedBooks
+					.Where(b => b.isActive == true)
+					.Select(b => new BookDetailPublisherModel
+					{
+						Id = b.Id,
+						Title = b.Title,
+						Description = b.Description,
+						AuthorId = b.AuthorId,
+						AuthorName = a.FirstName + " " + a.LastName,
+						PublisherId = b.PublisherId,
+						PublisherName = b.Publisher.Name,
+						ImageUrlLink = b.ImageUrlLink,
+						ReaderUrlLink = b.ReaderUrlLink,
+						Year = b.Year,
+						TypeBook = b.TypeBook,
+						Genre = b.Genre,
+						Language = b.Language,
+						Nationality = b.Nationality,
+						Price = b.Price,
+					})
+				})
+				.FirstOrDefaultAsync();
 
-			return new AuthorServiceModel
-			{
-				FirstName = author.FirstName,
-				LastName = author.LastName,
-			};
+			return author;
 		}
 	}
 }

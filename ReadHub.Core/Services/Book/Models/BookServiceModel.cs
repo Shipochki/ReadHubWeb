@@ -34,8 +34,6 @@
 
 		public decimal Price { get; set; }
 
-		public int? OrderId { get; set; }
-
 		public IEnumerable<ReviewDetailsServiceModel> Reviews { get; set; } = new List<ReviewDetailsServiceModel>();
 	}
 }

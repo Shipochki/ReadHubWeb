@@ -4,7 +4,7 @@
 
 	public interface IAuthorService
 	{
-		Task<AuthorServiceModel> GetAuthorById(int authorId);
+		Task<AuthorDetailsModel> GetAuthorById(int authorId);
 
 		Task<IEnumerable<AuthorServiceModel>> GetAllAuthors();
 	}

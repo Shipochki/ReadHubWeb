@@ -7,5 +7,7 @@
 		Task<bool> IsExistUserWithNumber(string phoneNumber);
 
 		Task<string> GetUserIdByPhoneNumber(string phoneNumber);
+
+		bool CorrectUserName(string userName, string reviewUserName);
 	}
 }

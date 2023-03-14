@@ -1,8 +1,12 @@
 ﻿@using ReadHub.Core.Services.Book.Models;
 @using ReadHub.Core.Services.Book;
+@using ReadHub.Core.Services.User;
 @using ReadHubWeb.Infranstructure;
+
 @model BookServiceModel
+
 @inject IBookService books
+@inject IUserService users
 
 @{
 	ViewBag.Title = "Book Details";
@@ -25,10 +29,6 @@
 			<p></p>
 			<div class="card-body">
 				<div class="btn-group" role="group" aria-label="Basic example">
-					<form class="input-group" asp-controller="Book"
-						  asp-area="" asp-action="Details" asp-route-id="@Model.Id" method="get">
-						<input class="btn btn-light" type="submit" value="Sold" />
-					</form>
 					<form class="input-group" asp-controller="Cart"
 						  asp-area="" asp-action="AddCart" asp-route-id="@Model.Id" method="post">
 						<input class="btn btn-success" type="submit" value="Buy" />
@@ -42,10 +42,9 @@
 			<p></p>
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
-					<p>Author: <b>@Model.AuthorFullName</b></p>
-					<p class="card-text">Publisher: <b>@Model.PublisherName</b></p>
+					<p>Author: <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.AuthorId">@Model.AuthorFullName</a></p>
+					<p>Publisher: <a asp-controller="Publisher" asp-action="Details" asp-route-id="@Model.PublisherId">@Model.PublisherName</a></p>
 					<p class="card-text">Genre: <b>@Model.Genre.ToString()</b></p>
-					<p class="card-text">TypeBook: <b>@Model.TypeBook.ToString()</b></p>
 					<p class="card-text">Published Year: <b>@Model.Year.Year</b></p>
 					<p class="card-text">Language: <b>@Model.Language</b></p>
 					<p class="card-text">Nationality: <b>@Model.Nationality</b></p>
@@ -85,12 +84,15 @@
 			{
 				@foreach (var review in Model.Reviews)
 				{
-					@if (this.User.UserName() == review.UserName || this.User.IsAdmin())
+					@if (this.User.Identity.IsAuthenticated)
 					{
-						<form class="input-group-sm" asp-controller="Review"
+						@if (this.User.IsAdmin() || this.users.CorrectUserName(this.User.UserName(), review.UserName))
+						{
+							<form class="input-group-sm" asp-controller="Review"
 				  asp-area="" asp-action="Remove" asp-route-id="@review.Id" method="get">
-							<input class="btn btn-danger" type="submit" value="Remove" />
-						</form>
+								<input class="btn btn-danger" type="submit" value="Remove" />
+							</form>
+						}
 					}
 
 					for (int i = 0; i < review.RatingNums; i++)
