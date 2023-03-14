@@ -1,4 +1,34 @@
-﻿@{
+﻿@using ReadHub.Core.Services.Book.Models;
+
+@model BookBestTenModel
+@{
     ViewData["Title"] = "Home Page";
+    var books = Model.TenBooks.ToList();
 }
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.TenBooks.Count(); i++)
+        {
+            var book = books[i];
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                <img class="d-block w-25" style="height:500px" src="@book.ImageUrlLink" alt="@book.Title">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>
+                        <a class="btn btn-primary" asp-controller="Book" asp-action="Details"
+                        asp-route-id="@book.Id">Details</a>
+                    </h5>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 

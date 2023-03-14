@@ -49,7 +49,7 @@
 
             TempData["message"] = "You have sucssessfuly added a Author!";
 
-            return RedirectToAction("AuthorDetails", "Author", new { authorId });
+            return RedirectToAction("Details", "Author", new { authorId });
         }
 
         [Authorize]
@@ -82,7 +82,7 @@
 
             TempData["message"] = "You have sucssessfuly added a house!";
 
-            return RedirectToAction("PublisherDetails", "Publisher", new { publisherId });
+            return RedirectToAction("Details", "Publisher", new { publisherId });
         }
 
     }

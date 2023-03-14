@@ -1,0 +1,32 @@
+﻿@using ReadHub.Core.Services.Publisher.Models;
+@model PublisherDetailsModel
+
+@{
+	ViewBag.Title = "Publisher Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+	<div class="row">
+		<div class="card col-8 border-0">
+			<p style="font-size:25px;"><u>@Model.Name</u></p>
+			<p>Year: <b>@Model.Year.Year</b></p>
+			<div class="card" style="width: 36rem;">
+				<div class="card-body">
+					<p><b>Description:</b></p>
+					<p>@Model.Description</p>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	@foreach (var book in Model.Books)
+	{
+		<partial name="_PublisherBookPartial" model="@book" />
+	}
+</div>

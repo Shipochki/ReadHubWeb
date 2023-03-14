@@ -18,5 +18,6 @@
 
 		Task Edit(int bookId, BookCreateServiceModel model);
 
+		Task<BookBestTenModel> GetBestTen();
 	}
 }

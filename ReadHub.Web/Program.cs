@@ -85,6 +85,26 @@ app.UseEndpoints(endpoints =>
 		defaults: new { Controller = "Book", Action = "Edit" });
 
 	endpoints.MapControllerRoute(
+		name: "Book Add",
+		pattern: "/Book/Add/{id}/{information}",
+		defaults: new { Controller = "Book", Action = "Add" });
+
+	endpoints.MapControllerRoute(
+		name: "Admin Author Details",
+		pattern: "/Admin/Author/Details/{id}/{information}",
+		defaults: new { Controller = "Author", Action = "Details" });
+
+	endpoints.MapControllerRoute(
+		name: "Book Details",
+		pattern: "/Book/Details/{id}/{information}",
+		defaults: new { Controller = "Book", Action = "Details" });
+
+	endpoints.MapControllerRoute(
+		name: "Admin Publisher Details",
+		pattern: "/Admin/Publisher/Details/{id}/{information}",
+		defaults: new { Controller = "Publisher", Action = "Details" });
+
+	endpoints.MapControllerRoute(
 		name: "Book AddReview",
 		pattern: "/Book/AddReview/{id}/{information}",
 		defaults: new { Controller = "Book", Action = "AddReview" });

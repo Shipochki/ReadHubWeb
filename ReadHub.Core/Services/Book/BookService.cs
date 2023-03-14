@@ -210,6 +210,24 @@
 				.ToListAsync();
 		}
 
-		
-	}
+        public async Task<BookBestTenModel> GetBestTen()
+        {
+            var books = await this.context
+				.Books
+				.Where(b => b.isActive == true)
+				.Select(c => new BookFrontPageModel
+				{
+					Id = c.Id,
+					Title = c.Title,
+					ImageUrlLink = c.ImageUrlLink
+				})
+				.Take(10)
+				.ToListAsync();
+
+			var result = new BookBestTenModel();
+			result.TenBooks = books;
+
+			return result;
+        }
+    }
 }
